@@ -1,0 +1,10 @@
+{
+  "name": "hubvision",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "npm --prefix server install && node server/server.js"
+  }
+}
