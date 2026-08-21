@@ -1,0 +1,17 @@
+"""
+HubVision - Capturador via Telegram Web
+========================================
+Funciona SEM bot, SEM permissao de admin.
+Coleta prompts quando voce clica em "gostei" no Telegram Web.
+
+COMO USAR:
+    1. Abra o Telegram Web (web.telegram.org)
+    2. Abra o Console do Navegador (F12 -> Console)
+    3. Cole o codigo que esta em telegram_web_collector.js
+    4. Pronto! Quando voce curtir uma msg com foto, salva automatico
+
+NAO PRECISA DE:
+    - Bot do Telegram
+    - Permissao de admin
+    - Instalacao de nada
+"""

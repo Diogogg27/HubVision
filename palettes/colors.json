@@ -1,0 +1,70 @@
+{
+  "name": "PromptLab",
+  "version": "1.0.0",
+  "colors": {
+    "primary": {
+      "name": "Cyan",
+      "hex": "#0087BD",
+      "rgb": "0, 135, 189",
+      "hsl": "197, 100%, 37%",
+      "usage": "Accent principal, botoes, links, particulas"
+    },
+    "secondary": {
+      "name": "Slate",
+      "hex": "#536878",
+      "rgb": "83, 104, 120",
+      "hsl": "207, 19%, 40%",
+      "usage": "Accent secundario, gradientes, bordas"
+    },
+    "tertiary": {
+      "name": "Ice",
+      "hex": "#B2FFFF",
+      "rgb": "178, 255, 255",
+      "hsl": "180, 100%, 85%",
+      "usage": "Highlights, dots, glow, texto claro"
+    },
+    "background": {
+      "dark": "#0a0e12",
+      "darkAlt": "#0f1419",
+      "light": "#f8fafc",
+      "usage": "Background principal e alternativo"
+    },
+    "surface": {
+      "dark": "rgba(0,135,189,0.05)",
+      "darkHover": "rgba(0,135,189,0.1)",
+      "border": "rgba(0,135,189,0.15)",
+      "usage": "Cards, superficies, bordas"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "rgba(255,255,255,0.7)",
+      "dim": "rgba(255,255,255,0.5)",
+      "usage": "Tipografia"
+    }
+  },
+  "gradients": {
+    "primary": "linear-gradient(135deg, #0087BD, #536878, #B2FFFF)",
+    "dark": "linear-gradient(135deg, #0a0e12, #0f1419)",
+    "glow": "0 0 40px rgba(0,135,189,0.4)",
+    "cardHover": "linear-gradient(135deg, rgba(0,135,189,0.1), rgba(83,104,120,0.1))"
+  },
+  "spacing": {
+    "xs": "8px",
+    "sm": "16px",
+    "md": "24px",
+    "lg": "48px",
+    "xl": "80px",
+    "2xl": "120px"
+  },
+  "borderRadius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "16px",
+    "xl": "24px",
+    "full": "100px"
+  },
+  "fonts": {
+    "primary": "Outfit",
+    "weights": [200, 300, 400, 500, 600, 700]
+  }
+}

@@ -1,0 +1,14 @@
+# Robots.txt - PromptHub
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://hubvisionb.com.br/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$

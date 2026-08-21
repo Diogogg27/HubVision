@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>HubVision - Instalar Coletor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0f1a;
+      color: #e0e6ed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 {
+      color: #00d4ff;
+      margin-bottom: 20px;
+    }
+    .step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,135,189,0.2);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      text-align: left;
+    }
+    .step-num {
+      background: #0087BD;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    code {
+      background: #1a1a2e;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #00d4ff;
+    }
+    .bookmarklet {
+      display: inline-block;
+      background: linear-gradient(135deg, #0087BD, #00d4ff);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 20px 0;
+      cursor: grab;
+      transition: transform 0.2s;
+    }
+    .bookmarklet:hover {
+      transform: scale(1.05);
+    }
+    .warning {
+      background: rgba(255,193,7,0.1);
+      border: 1px solid rgba(255,193,7,0.3);
+      border-radius: 6px;
+      padding: 15px;
+      margin: 15px 0;
+      color: #ffc107;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>HubVision Prompt Collector</h1>
+    <p>Instale o coletor de prompts em 2 cliques!</p>
+
+    <div class="step">
+      <span class="step-num">1</span>
+      <strong>Arraste o botao abaixo para sua barra de favoritos</strong>
+      <br><br>
+      <a class="bookmarklet" href="javascript:void(function(){var%20s=document.createElement('script');s.src='https://raw.githubusercontent.com/';document.body.appendChild(s);alert('Instalado!%20Acesse%20o%20Telegram%20Web%20e%20abra%20o%20Console%20(F12)%20para%20ver%20as%20instrucoes.');}());">
+        HubVision Collector
+      </a>
+    </div>
+
+    <div class="step">
+      <span class="step-num">2</span>
+      <strong>Abra o Telegram Web</strong>
+      <br>
+      Acesse <code>https://web.telegram.org</code>
+    </div>
+
+    <div class="step">
+      <span class="step-num">3</span>
+      <strong>Abra o Console</strong>
+      <br>
+      Pressione <code>F12</code> → aba <code>Console</code>
+    </div>
+
+    <div class="step">
+      <span class="step-num">4</span>
+      <strong>Cole o codigo abaixo e pressione Enter</strong>
+      <br><br>
+      <textarea id="code" readonly style="width:100%;height:150px;background:#1a1a2e;color:#00d4ff;border:1px solid #333;border-radius:6px;padding:10px;font-family:monospace;font-size:12px;"></textarea>
+      <br><br>
+      <button onclick="document.getElementById('code').select();document.execCommand('copy');alert('Copiado!')" style="background:#0087BD;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;">
+        Copiar Codigo
+      </button>
+    </div>
+
+    <div class="warning">
+      <strong>Importante:</strong> Se aparecer "allow pasting", digite isso no Console e pressione Enter antes de colar o codigo.
+    </div>
+  </div>
+
+  <script>
+    // Code to copy
+    const code = `(function(){var s=document.createElement('script');s.textContent=\`
+(function(){
+'use strict';
+var collectedPrompts=JSON.parse(localStorage.getItem('hv_prompts')||'[]');
+
+function showNotification(msg,type){
+var d=document.createElement('div');
+d.style.cssText='position:fixed;top:20px;right:20px;background:'+(type==='success'?'#00c853':'#0087BD')+';color:white;padding:15px 25px;border-radius:10px;z-index:99999;font-family:sans-serif;animation:fadeIn .3s';
+d.textContent=msg;
+document.body.appendChild(d);
+setTimeout(function(){d.remove()},4000);
+}
+
+function savePrompt(data){
+var p={id:Date.now(),text:data.text,image_url:data.imageUrl,source:'Telegram Web',collected_at:new Date().toISOString()};
+collectedPrompts.push(p);
+localStorage.setItem('hv_prompts',JSON.stringify(collectedPrompts));
+showNotification('Prompt coletado! ('+collectedPrompts.length+' total)','success');
+console.log('[HubVision] Coletado:',p);
+}
+
+document.addEventListener('click',function(e){
+var btn=e.target.closest('.ReactionButton,[data-react],button[title*="Like"],button[title*="Curtir"]');
+if(!btn)return;
+var msg=btn.closest('.Message,.message,.bubble,[data-message-id]');
+if(!msg)return;
+var img=msg.querySelector('img.media-photo,img.media-image,video,.media-container');
+if(!img)return;
+setTimeout(function(){
+var textEl=msg.querySelector('.text-content,.message-text,.media-caption');
+var text=textEl?(textEl.innerText||textEl.textContent):'';
+var imgEl=msg.querySelector('img[src]');
+var imageUrl=imgEl?imgEl.src:'';
+if(text||imageUrl)savePrompt({text:text.trim(),imageUrl:imageUrl});
+},300);
+},true);
+
+window.hvExport=function(){
+var d=JSON.stringify(collectedPrompts,null,2);
+var b=new Blob([d],{type:'application/json'});
+var a=document.createElement('a');
+a.href=URL.createObjectURL(b);
+a.download='hubvision_prompts_'+Date.now()+'.json';
+a.click();
+showNotification('Exportado '+collectedPrompts.length+' prompts!','success');
+};
+
+window.hvPrompts=function(){return collectedPrompts};
+
+showNotification('HubVision ATIVO! Curte uma msg com foto.','success');
+console.log('%c[HubVision] Coletor Iniciado!','color:#00d4ff;font-size:16px;font-weight:bold');
+console.log('Use hvExport() para exportar');
+})();
+\`;document.body.appendChild(s)})();`;
+    document.getElementById('code').value = code;
+  </script>
+</body>
+</html>

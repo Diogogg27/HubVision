@@ -1,0 +1,953 @@
+/* PromptHub - Futuristic JavaScript */
+
+function rand(min, max) { return Math.random() * (max - min) + min; }
+
+// === PERFORMANCE: Debounce ===
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // === PARTICLES ===
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let mouse = { x: 0, y: 0 };
+  let animationId;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', debounce(resize, 100));
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.speedY = (Math.random() - 0.5) * 0.3;
+      this.opacity = Math.random() * 0.3 + 0.1;
+      this.hue = Math.random() > 0.5 ? 190 : 180;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${this.hue}, 100%, 50%, ${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 100; i++) particles.push(new Particle());
+
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0, 135, 189, ${0.08 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+      const md = Math.sqrt((particles[i].x - mouse.x) ** 2 + (particles[i].y - mouse.y) ** 2);
+      if (md < 170) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0,255,136,${0.35 * (1 - md / 170)})`;
+        ctx.lineWidth = 0.8;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // === CUSTOM CURSOR ===
+  const cursor = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+
+  document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorDot.style.left = e.clientX + 'px';
+    cursorDot.style.top = e.clientY + 'px';
+  });
+
+  document.querySelectorAll('a, .btn, .service-card, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // === SCROLL REVEAL ===
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('active');
+        }, index * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // === SMOOTH SCROLL ===
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        // Active state
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // === ACTIVE NAV ON SCROLL ===
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', debounce(() => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === `#${current}`) {
+        a.classList.add('active');
+      }
+    });
+  }, 100));
+
+  // === HERO PARALLAX ===
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    const glow1 = document.querySelector('.hero-glow-1');
+    const glow2 = document.querySelector('.hero-glow-2');
+    if (glow1) glow1.style.transform = `translate(${x}px, ${y}px)`;
+    if (glow2) glow2.style.transform = `translate(${-x}px, ${-y}px)`;
+  });
+
+  // === PRELOADER ===
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(() => preloader.classList.add('evaporate'), 2000);
+      setTimeout(() => preloader.classList.add('hidden'), 2900);
+    }
+  });
+
+  // === NAV SCROLL EFFECT ===
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (window.pageYOffset > 100) {
+      nav.style.background = 'rgba(3,7,18,0.95)';
+      nav.style.borderBottomColor = 'rgba(0,135,189,0.15)';
+    } else {
+      nav.style.background = 'rgba(3,7,18,0.8)';
+      nav.style.borderBottomColor = 'rgba(0,135,189,0.08)';
+    }
+  });
+
+const promptData = [
+  { cat: "Moda & Beleza", img: "prompt_001.jpg", prompt: "minimalist studio portrait of a woman with very short platinum blonde hair, natural skin texture, freckles, subtle makeup, golden hoop earrings, black high-neck outfit, sharp lighting, deep blue background and aA vicious Doberman dug snarling with jaws wide open, wearing custom diamond grillz covering its sharp teeth, each tooth shimmering with brilliant-cut diamonds, iced-out luxury hip-hop style, sleek black and tan fur gleaming under harsh studio lighting, muscular body exuding raw power, extravagant diamond-studded collar matching the grillz, surreal mix of danger and opulence, bold and intimidating yet glamorous, high-fashion photography aesthetic, crisp hyper-realistic textures, sparkling reflections on every jewel, dramatic contrast against a vivid all-red background, cinematic luxury portrait with street culture influence standing next to her 24 7 5 1 12.5K 02:53" },
+  { cat: "Icones & UI", img: "prompt_002.jpg", prompt: "a translucent folder icon in glassmorphism style, containing a soft gradient card partially visible at the top, card displays the word \"[TEXT]\" clearly in white bold letters, card fades into blur inside the folder like frosted glass, gradient blends of [COLOR1], [COLOR2], and [COLOR3], clean and modern UI-inspired design, floating on a white solid background 14 4 4 2 13.2K 03:34" },
+  { cat: "Objetos & Arte", img: "prompt_003.jpg", prompt: "Pure texture of [MATERIAL_TYPE] in [COLOR] tones, without seams, folds, or stitches, filling the entire frame. Detailed [MATERIAL_TYPE] surface visible with [TEXTURE_QUALITY], minimalist composition only the material and its texture, no extra elements. [COLOR] tones, slightly lifted black point, low contrast, soft warm hues, studio lighting, professional commercial photography. 26 6 5 13.5K 03:40" },
+  { cat: "Objetos & Arte", img: "prompt_004.jpg", prompt: "The image depicts a surreal and minimalist scene under a clear blue sky. At the center, perched atop a small grassy hill, is a [FURNITURE TYPE] that appears to be entirely covered in [COLOR] [MATERIAL/TEXTURE], blending [STYLE DESCRIPTION] with the landscape. The [FURNITURE TYPE] has a [SHAPE DESCRIPTION] and [LEG/BASE DESCRIPTION], resembling a [DESIGN STYLE] design, but instead of traditional indoor placement, every surface is [COLOR/TEXTURE DESCRIPTION]. The [COLOR] color [CONTRAST DESCRIPTION] with the surrounding green ground, making it look as though the [FURNITURE TYPE] has been [PLACEMENT DESCRIPTION] on the hill. The hill itself is soft, rounded, and uniformly carpeted with fresh green grass, casting subtle shadows in the sunlight. The overall atmosphere is calm, clean, and dreamlike, evoking a sense of harmony between [FURNITURE DESCRIPTION] and organic forms. The image carries a surreal quality, blending furniture with the landscape, blurring the line between human-made objects and nature. 15 12 5 3 1 13.9K 05:44" },
+  { cat: "Comida & Bebida", img: "prompt_005.jpg", prompt: "A minimalist and surreal product photography composition featuring a medical IV drip bag filled with [BEVERAGE] instead of traditional medical fluid. The transparent plastic IV bag hangs against a clean light gray background, connected to a [COLOR] IV tube at the bottom. The bag contains [LIQUID DESCRIPTION] with a beautiful gradient from [TOP COLOR] to [BOTTOM COLOR]. White text on the bag reads \"[BEVERAGE NAME]\" in bold modern typography, with \"[THEME]\" branding above it. The liquid appears authentic with [TEXTURE DETAILS], mimicking real [BEVERAGE]. The lighting is soft and clinical, transforming medical equipment into an artistic wellness statement. 37 7 6 4 14.5K 07:50" },
+  { cat: "Moda & Beleza", img: "prompt_006.jpg", prompt: "A woman with black hair and gray eyes wearing an elaborate white ruff collar, holding and [eating/drinking] a modern \"[PRODUCT NAME]\" [bar/package/bottle/can] in its contemporary [COLOR] wrapper/packaging with [contemporary logo and branding/bite taken from it/piece in her mouth], painted in the style of an old master 18 17 6 3 12.3K 03:15" },
+  { cat: "Comida & Bebida", img: "prompt_007.jpg", prompt: "A surreal food art photograph of a luxury handbag made entirely of [FOOD MATERIAL], sitting on golden toast on a white ceramic plate. The [FOOD MATERIAL] handbag has realistic leather bag details including stitching, a top handle, and front flap closure. The [FOOD MATERIAL] is melting and dripping down onto the toast below. Shot against a minimal beige background with soft, even lighting and clean composition in a modern food photography style. 16 11 8 2 10.9K 03:25" },
+  { cat: "Objetos & Arte", img: "prompt_008.jpg", prompt: "A surreal outdoor cinema experience: [LOCATION DESCRIPTION] forming a natural amphitheater around [WATER BODY], with a large outdoor movie screen displaying the Netflix logo positioned between [NATURAL FORMATIONS]. A [BOAT TYPE] filled with silhouettes of [AUDIENCE TYPE] floating on the [WATER DESCRIPTION]. [LIGHTING DESCRIPTION] sky creating dramatic atmosphere, [COLOR PALETTE] lighting illuminating the scene. [FLOATING ELEMENTS] scattered across the water surface. Cinematic composition with [DOMINANT COLORS] and [ACCENT LIGHTING]. Hyper-realistic digital art style, atmospheric perspective, stunning natural lighting effects. 18 5 3 2 9.7K 04:09" },
+  { cat: "Comida & Bebida", img: "prompt_009.jpg", prompt: "A realistic piece of creamy butter pierced and impaled on the tines of a golden fork. The butter has natural dairy texture with authentic creamy yellow color, showing realistic indentations where the fork prongs penetrate through it. The word [WORD] is embossed on the butter surface. Golden metallic fork with warm brass finish, showing realistic metal reflections. The butter piece maintains natural irregular edges and authentic butter consistency while being held securely on the fork tines. Clean neutral beige background with soft studio lighting. Hyperrealistic food photography style, showing the fork penetrating through the butter with natural deformation around the prongs. Professional lighting with soft shadows. 20 8 4 1 1 1 9.3K 03:43" },
+  { cat: "Moda & Beleza", img: "prompt_010.jpg", prompt: "Ultra high-definition luxury fashion editorial inside a dark cinema hall. Rows of empty red velvet seats form a bold, graphic backdrop. In the center, a woman sits in a surreal haute couture pose. She wears an avant-garde gown entirely sculpted from [SNACK_DESCRIPTION], transforming the snack into a lavish couture texture. The framing is dynamic and fashion-forward: we see only the lower half of her face, keeping her identity mysterious, while emphasizing the elegance of her posture and the extravagant [SNACK_TYPE] dress. Dramatic, moody lighting enhances the contrast between the deep crimson velvet and the [COLOR_AND_TEXTURE_DESCRIPTION], creating a powerful, surreal editorial composition. 30 10 6 2 1 10K 04:32" },
+  { cat: "Produtos & Publicidade", img: "prompt_011.jpg", prompt: "A premium advertising poster for [BRAND NAME] [PRODUCT CATEGORY]. A modern smartphone showing the [BRAND NAME] website, with a sleek [THEMATIC OBJECT] flying out of the screen. In the background, a soft elegant [BACKGROUND ELEMENT] in [COLOR PALETTE], with subtle [ACCENT COLOR] light lines connecting [CONNECTING ELEMENTS]. 17 13 4 4 3 10.1K 02:57" },
+  { cat: "Produtos & Publicidade", img: "prompt_012.jpg", prompt: "[PLATFORM] storefront page design for [BRAND/CATEGORY], modern clean e-commerce layout, hero banner with [HERO CONTENT], product grid cards, advantages section with icons, lifestyle banner at [POSITION], footer with company info. Color palette: [COLOR 1] [HEX], [COLOR 2] [HEX], [COLOR 3] [HEX], [COLOR 4] [HEX], [COLOR 5] [HEX]. [THEME DESCRIPTION], UX/UI wireframe mockup, high resolution 30 4 2 10.7K 03:26" },
+  { cat: "Objetos & Arte", img: "prompt_013.jpg", prompt: "Huge [COLOR] balloons in the form of the words [WORD]. The balloons dominate the city street, surrounded by urban architecture. Clear summer sky, sunlight shining brightly. Real photography style 19 5 5 3 11.1K 03:25" },
+  { cat: "Objetos & Arte", img: "prompt_014.jpg", prompt: "A [COLOR] transparent acrylic slot machine with three reels. The reels are white and have no patterns. The entire scene is presented in a front view with a white background. It was designed in the style of artist David Hockney and is one of his most popular works on Instagram. This photo perfectly captures every detail, creating an astonishing visual experience. Focus stacking, high resolution, 3840x2560 pixels 8 5 4 3 2 11.2K 04:55" },
+  { cat: "Paisagens & Cidades", img: "prompt_015.jpg", prompt: "wide open meadow under bright blue sky, soft rolling green grass with a few wildflowers scattered, warm sunlight creating gentle shadows, a simple wooden table with an open laptop and a notebook placed casually, minimal lifestyle editorial aesthetic, bright and airy, clean composition, plenty of negative space, calm and natural atmospherem 19 6 5 12.2K 10:00" },
+  { cat: "Objetos & Arte", img: "prompt_016.jpg", prompt: "The interior of a [COLOR] subway train filled with [MAIN ELEMENT], [CEILING/WALLS DESCRIPTION], and [SEAT COLOR] seats, all rendered in a hyper-realistic style 22 6 5 11.9K 02:39" },
+  { cat: "Animais", img: "prompt_017.jpg", prompt: "A Cole Duck, white, normal size, fluffy, chubby, wearing black sunglasses, a straw hat on his head, very relaxed, leaning back comfortably in a pink swimming ring, holding a glass of orange juice on one wing with a red and white striped straw with an orange decorative slice stuck in the glass, in an open air swimming pool, during the daytime, the sunlight pouring over the Cole Duck, realistic photographic style, surrealistic, outdoor light is bright. Cool color tone, fresh and natural, medium shot, oblique side shot, clean composition, 8k 16 5 3 1 8.4K 04:21" },
+  { cat: "Icones & UI", img: "prompt_018.jpg", prompt: "holographic 3D icons, graduation and party theme, iridescent style, [COLOR] and neon tones, glossy plastic look, isolated on grey background, cap and diploma, champagne bottle, confetti, smiling graduate, camera, disco ball, dancing figure, headphones, pillars, medals, sparkles, balloons, high detail, soft shadows 18 5 3 1 8.5K 04:19" },
+  { cat: "Moda & Beleza", img: "prompt_019.jpg", prompt: "A visual contrast of a woman, split in half: the left side shows her in [OUTFIT_1] holding [ACCESSORY_1], while the right side shows her in [OUTFIT_2] holding [ACCESSORY_2]. White background, Canon EOS R5 camera photography 26 2 8.9K 05:45" },
+  { cat: "Moda & Beleza", img: "prompt_020.jpg", prompt: "A Pixar-style frontal portrait of [CELEBRITY NAME], showing their kindness and amiability --ar 3:4 23 22 5 3 1 1 8.4K 04:12" },
+  { cat: "Produtos & Publicidade", img: "prompt_021.jpg", prompt: "A sleek, modern [DEVICE] floating slightly above a reflective surface, positioned at an angle, illuminated by soft blue and purple gradient lighting, minimalistic composition, futuristic and clean aesthetic, high detail, realistic reflections, cinematic lighting, smooth textures, digital art 23 5 2 1 1 8.2K 03:32" },
+  { cat: "Comida & Bebida", img: "prompt_022.jpg", prompt: "product photography of extra virgin [OIL_TYPE] oil bottle with [NATURAL_INGREDIENTS], spinning on white and [ACCENT_COLOR] minimal background, elegant cinematic lighting 19 8 7 2 8.4K 04:41" },
+  { cat: "Animais", img: "prompt_023.jpg", prompt: "CCTV-like surveillance footage shows a [COLOR] [ANIMAL] sitting in an office chair in a small room, using a computer. The camera angle is from the upper corner of the room, with fisheye lens distortion. The image is grainy and low-resolution, as if shot on an old-fashioned monitor. The [ANIMAL] appears confused, or perhaps very focused, as it types on a keyboard. The room is dimly lit, with a slightly cluttered desk and wires. The video uses a vertical 9:16 aspect ratio. The style is realistic, with beautiful images, slightly blurred, and superimposed with a timestamp. 14 13 4 2 8.5K 09:49" },
+  { cat: "Moda & Beleza", img: "prompt_024.jpg", prompt: "Fashion photography in the style of Richard Avedon, a Vogue photoshoot for Balenciaga, featuring vintage cars with a male model holding a [FOOD ITEM] in the back seat, against a neutral background, with silver sunglasses, hyper-realistic skin texture, and a highly detailed face 13 8 2 2 1 8.6K 08:00" },
+  { cat: "Produtos & Publicidade", img: "prompt_025.jpg", prompt: "A 3D-rendered [PLATFORM NAME] logo, crafted from translucent glass with mirror-smooth surface and iridescent prismatic edges, glowing with vibrant [PRIMARY COLOR] and [SECONDARY COLOR] neon tones. The iconic [LOGO SHAPE/SYMBOL] floats elegantly above a reflective obsidian surface, illuminated by soft [COLOR] underlighting that creates dramatic reflections and a premium high-tech aesthetic. The background is pure black void, enhancing the logo's luminous glow and creating a futuristic, minimalist composition. Rendered with cinematic studio lighting, photorealistic depth, crystal-clear reflections, and authentic material physics for a luxury brand presentation. 19 7 6 2 2 9.1K 03:07" },
+  { cat: "Moda & Beleza", img: "prompt_026.jpg", prompt: "The high-resolution image features a 25-year-old young Korean woman. Her long, dark black hair flows smoothly past her shoulders in waves, surrounded by a clean white background. She tilts her head slightly and looks directly at the camera with confidence, holding a [INSERT BEAUTY PRODUCT] out toward the camera with one hand. The low angle, looking up from below, places the product close to the camera and shows the person small, expressing a sense of perspective. Her smooth skin tone, matte coral lips, and minimalist, sophisticated fashion are complemented by subtle silver accessories. The product has clean minimal design with no text, labels, logos, branding, or writing of any kind - completely blank surface. 18 6 3 2 1 1 10.1K 05:43" },
+  { cat: "Animais", img: "prompt_027.jpg", prompt: "A cute [ANIMAL/BREED] peeks out from a [COLOR] heart-shaped hole, it must be a feeling of tenderness 25 3 1 9K 06:03" },
+  { cat: "Moda & Beleza", img: "prompt_028.jpg", prompt: "A professional beauty studio close-up portrait, split into two horizontal sections. Top section: a young Caucasian woman’s eyes and eyebrows before applying mascara, with natural, short and uncoated lashes, clean skin texture, soft studio lighting, natural shadows, ultra high-resolution. Bottom section: the same woman's eyes and eyebrows after applying black mascara - her lashes are long, thick, voluminous, and precisely separated. Skin tone and lighting remain consistent. Clean white background, makeup advertisement quality, sharp detail, Canon EOS R5 + 85mm lens, ultra-realistic beauty photography 16 3 1 7.9K 08:31" },
+  { cat: "Comida & Bebida", img: "prompt_029.jpg", prompt: "photorealistic close-up of a [fruit] made of emerald crystal, on a white marble table, in a bright clean kitchen, cinematic lighting, clear reflections, caustics on the table, ultra-detailed, 8k --ar 9:16 16 2 2 1 7.8K 05:03" },
+  { cat: "Comida & Bebida", img: "prompt_030.jpg", prompt: "s :   Realistic gummy bear [ACTION], photorealistic translucent jelly texture, detailed surface reflections and shadows, white background, studio lighting, high detail, 3D photorealism 14 3 1 7.7K 05:00" },
+  { cat: "Comida & Bebida", img: "prompt_031.jpg", prompt: "Photo of girl in her early 20s holding a big [FOOD] with both hands and taking a big bite, the [FOOD] is oversized compared to her face, fully topped with jam, vivid food texture with visible bite mark, shallow depth of field, cinematic lighting, warm joyful mood, cinematographic fuchsia background 21 3 3 8K 04:23" },
+  { cat: "Comida & Bebida", img: "prompt_032.jpg", prompt: "Luxury cake shaped like [FOOD ITEM], [TEXTURE DESCRIPTION], [SPECIFIC FOOD DETAILS], [FOOD AESTHETIC STYLE], placed on elegant cake stand on marble table, beautiful old money style garden background, elegant presentation, professional food photography, studio lighting, high detail, premium quality 13 12 3 2 1 8.2K 04:13" },
+  { cat: "Objetos & Arte", img: "prompt_033.jpg", prompt: "Photograph of an astronaut playing the violin in a field of [PLANT], wearing black and gloves, with a helmet reflecting [COLOR] [PLANT]. The photography is cinematic in style, with an ethereal and minimalistic aesthetic. 21 4 3 1 1 8K 03:54" },
+  { cat: "Objetos & Arte", img: "prompt_034.jpg", prompt: "A wide-angle shot inside a cinema in 3:4 format, clearly highlighting two super-premium Emirates First Class seats in light beige leather with gold accents, wide armrests, and built-in lighting, placed side by side in the center of the middle row, all other seats in the cinema are standard black fabric chairs with smaller size and simpler design, some of them occupied, others empty, forming a natural audience setting, the luxurious beige seats distinctly elevated in style and space, one of them occupied by [PERSON] laughing genuinely while watching a movie, holding a popcorn bag, the other premium seat empty, soft ambient screen light casting warm highlights over the beige leather and subtle shadows across the black seats, moody and immersive atmosphere with rich cinematic color grading in deep teal and warm amber tones, shot with a Sony A7R V, 35mm f/1.8 lens, hyper-photorealistic with natural human presence and strong visual contrast 16 10 2 1 1 8.6K 07:04" },
+  { cat: "Objetos & Arte", img: "prompt_035.jpg", prompt: "Close up of a, [MATERIAL] texture in [COLOR] color. Smooth, creamy consistency with light-refracting properties. Soft lighting effects. It's a close-up shot that highlights the [UNIQUE_FEATURE] design features. Photography. Very sensorial. 16 6 4 2 1 7.5K 04:43" },
+  { cat: "Comida & Bebida", img: "prompt_036.jpg", prompt: "A floating [FOOD ITEM] with [INGREDIENT 1], [INGREDIENT 2] and [INGREDIENT 3] against a [COLOR] background, rendered in the style of food photography. The composition is dynamic, with each [FOOD TYPE] element suspended at different heights to create depth. 33 9 4 2 1 8.1K 05:02" },
+  { cat: "Icones & UI", img: "prompt_037.jpg", prompt: "A set of icon designs (12), ios desktop icons, [KFC/Starbucks/McDonald's] style, three-dimensional --ar 9:16 26 6 2 2 1 8.5K 05:31" },
+  { cat: "Comida & Bebida", img: "prompt_038.jpg", prompt: "A highly realistic, full-color photo-like image showing a [DRINK COLOR & TYPE] liquid filling the entire frame. The surface has [TEXTURE & UNIQUE FEATURES] under soft natural lighting. No cup or container is visible - just the liquid itself filling the frame edge to edge. Style: Ultra-realistic macro photography. Mood: [MOOD]. 29 8 8.3K 07:35" },
+  { cat: "Comida & Bebida", img: "prompt_039.jpg", prompt: "A computer keyboard where each key is made of [COLOR] [MARSHMALLOW/ FRUIT SORBET/ CHOCOLATE] --ar 3:4 19 6 4 8K 04:10" },
+  { cat: "Moda & Beleza", img: "prompt_040.jpg", prompt: "High fashion surreal portrait of a model, hair made entirely of [FOOD_ITEM], realistic transformation where [FOOD_DESCRIPTION] forms [HAIRSTYLE_DESCRIPTION], no regular hair visible, [TEXTURE_DESCRIPTION], whimsical luxury vibe, bright pastel background, Vogue editorial photography 20 8 4 1 8.2K 04:22" },
+  { cat: "Comida & Bebida", img: "prompt_041.jpg", prompt: "Minimalist [color] beverage bottle floating in zero gravity, centered in the frame. The bottle has a large [uppercase letter or logo] printed in [text color], with smaller text reading “[flavor or tagline]” near the bottom. A white-suited astronaut floats softly out of focus in the background, with the Earth behind them — showing the curve of the planet, blue oceans, and white clouds. The bottle is in sharp focus, lit with soft cinematic studio-style lighting. Ultra photorealistic NASA-style space photography. Product ad composition with shallow depth of field. 16 13 3 1 1 9.2K 03:48" },
+  { cat: "Comida & Bebida", img: "prompt_042.jpg", prompt: "A [sport item] made entirely from [dessert type], with detailed texture showing [texture detail]. Placed on a [background color] background with soft studio lighting and shallow depth of field. The surface shows slight melting or dripping, creating a hyperrealistic food-inspired visual. Minimalist composition, centered object, high detail focus, product ad style. 18 6 8.8K 06:55" },
+  { cat: "Objetos & Arte", img: "prompt_043.jpg", prompt: "Close up of a, [MATERIAL] texture in [COLOR] color. Smooth, creamy consistency with light-refracting properties. Soft lighting effects. It's a close-up shot that highlights the [UNIQUE_FEATURE] design features. Photography. Very sensorial. 13 7 2 9.2K 06:45" },
+  { cat: "Objetos & Arte", img: "prompt_044.jpg", prompt: "Colossal [NUMBERS] numbers sculpted from vibrant [COLOR] rubber, centered in the frame. [COLOR] background. Ultra-photorealistic rendering. Hyperrealistic textures, including a subtle rubber sheen, fine surface grain, realistic light absorption, and minor imperfections. Cinematic lighting, highlighting the soft volume and texture of the rubber. 3D render. Octane render 16 4 3 8.8K 05:18" },
+  { cat: "Moda & Beleza", img: "prompt_045.jpg", prompt: "Ultra-realistic low-angle shot of a stunning [GENDER] model wearing a full avant-garde couture outfit entirely made from [CONTAINER/MATERIAL], each compartment holding a real [ITEM], the [CONTAINER/MATERIAL] forming an the coat, sunlight highlighting the texture of the [ITEM] and [CONTAINER/MATERIAL], dramatic blue sky with a few clouds in the background, cinematic high-fashion editorial style, ultra-photorealistic details, shot on Hasselblad H6D 15 5 5 8.1K 03:32" },
+  { cat: "Produtos & Publicidade", img: "prompt_046.jpg", prompt: "Create a hyper-realistic and modern storefront entrance designed for a grand opening. The glass doors are closed and sleek. Decorate the area around the entrance with large, visually striking [OBJECT], arranged in a festive and creative way — no balloons or traditional decorations. Use natural daylight with soft cinematic lighting. The setting should feel upscale, clean, and stylish, with an atmosphere of celebration and uniqueness. 9 7 3 2 8K 04:23" },
+  { cat: "Comida & Bebida", img: "prompt_047.jpg", prompt: "A person washing bright yellow lemons in a traditional stone basin, Mediterranean courtyard setting, warm cream-colored stucco walls with carved decorative details, simple brass spigot with flowing water, rectangular stone trough filled with floating yellow citrus fruits, hands gently rinsing lemons, woven basket nearby, beautiful natural lighting creating soft shadows, textured walls, rustic outdoor washing area, sunny atmosphere, traditional lifestyle scene, warm golden hour lighting, detailed stone textures, peaceful daily life moment 13 9 4 2 1 8.2K 04:36" },
+  { cat: "Objetos & Arte", img: "prompt_048.jpg", prompt: "A glass capsule with the word \"[SPORT/ACTIVITY]\" written on it, containing an entire miniature [SPORT/ACTIVITY] scene inside, with tiny people engaged in [SPECIFIC ACTIVITY DESCRIPTION], [RELEVANT EQUIPMENT/ENVIRONMENT], placed against a dark gray background. The colors used for the photography should be vibrant, creating a strong contrast between lightness and darkness to highlight the details. This design would be suitable as an advertising poster or packaging logo. 26 5 8.3K 08:25" },
+  { cat: "Produtos & Publicidade", img: "prompt_049.jpg", prompt: "A [BRAND]-style [ITEM TYPE], but the [MAIN PART] is made from a realistic ripe [FRUIT/VEGETABLE], [TEXTURE DESCRIPTION], [BRAND LOGO] clearly visible, [STRUCTURAL DETAILS], classic [ITEM TYPE] proportions maintained, product photography, studio lighting, light [COLOR] background, high detail --ar 3:4   example:    A Gucci-style tote bag, but the bag is made from a realistic orange pumpkin, ribbed orange surface with natural pumpkin lines, Gucci logo in gold lettering, leather straps and trim, structured tote bag shape, product photography, studio lighting, light orange background, high detail  --ar 3:4 19 8 2 7.8K edited 04:40" },
+  { cat: "Produtos & Publicidade", img: "prompt_050.jpg", prompt: "s   A [MATERIAL] statue of Rolex watch with [SURFACE_EFFECT] all over it. Diorama. Realistic shadow effects. Black background. 4k. Crazy details. 13 7 2 2 1 7.6K 04:31" },
+  { cat: "Animais", img: "prompt_051.jpg", prompt: "A white kitten, the main subject, is centered in a full body shot. It wears a pink glittery polka dot headscarf with a bow, pink diamond encrusted sunglasses, and a metal necklace, looking extremely playful. The kitten is reclining back comfortably on a pink beach chair, holding a green coconut with a pink umbrella and a blue straw, sipping from the straw. The background is a beach with a blue sky and the sea. The image combines cute pets, fashion, and vacation elements, with bright and fresh colors, creating a relaxed, trendy, and healing atmosphere that conveys a lazy and comfortable vacation feeling. The composition is clean and simple. Professional DSLR photography, 8K resolution, high detail. detailed fur texture, soft light, natural features. 11 7 2 1 8.1K 05:00" },
+  { cat: "Paisagens & Cidades", img: "prompt_052.jpg", prompt: "panoramic view of a bright futuristic city sitting on a floating island high above the clouds, lush forest covering the island with visible rock cliffs underneath, futuristic skyscrapers and a monumental central tower, people walking on sky bridges, maglev trains gliding through buildings, clear sunny sky with few fluffy clouds, utopian atmosphere, realistic photography, shot with Sony Alpha 7R V + FE 16-35mm f/2.8 GM, wide cityscape, aerial angle 10 5 5 4 7.7K 03:55" },
+  { cat: "Animais", img: "prompt_053.jpg", prompt: "[Animal] takes a selfie with [animal 1] and [animal 2] standing behind them on the African savannah at sunset --ar 9:16 33 11 9 5 1 7.8K 04:26" },
+  { cat: "Produtos & Publicidade", img: "prompt_054.jpg", prompt: "A stylish editorial-style close-up of a transparent glass home fragrance diffuser jar with a wide mouth, filled with golden-amber scented liquid. Thin wooden reeds extend from the jar. A minimal beige label is placed on the front of the jar. The diffuser sits on a neutral surface, surrounded by floating white peonies such as white peonies frozen mid-air. Natural daylight creates soft shadows and enhances the glossy texture of the liquid and glass. Clean, artistic still life inspired by [season or theme]. --ar 3:4 15 1 1 9.4K 07:05" },
+  { cat: "Comida & Bebida", img: "prompt_055.jpg", prompt: "An aesthetic minimalist breakfast on the table, golden sunlight, Perfectly cooked sunny side eggs, croissants with butter, slices of fresh orange and glasses of bright orange juice. White painted plates and elegant gold cutlery create a modern aesthetic atmosphere, and the tablecloth on the table is olive-colored. Soft natural lighting, high detail, cinematic composition, ultra HD, 8K, --ar 9:16 --v 6.1 --raw 9 5 3 1 1 8.6K 04:40" },
+  { cat: "Paisagens & Cidades", img: "prompt_056.jpg", prompt: "A secret open-air night party under the stars, featuring a stylish and diverse group of old men and women (ages 80 and up) dressed in elegant all-white outfits, dancing with their hands in the air. The scene takes place outdoors in a spacious urban rooftop, abandoned lot, or forest clearing surrounded by colorful neon and LED light beams in purple, pink, and electric blue tones. There's a euphoric, luxurious energy people are laughing, dancing, hugging, immersed in music. The white clothing is clearly visible and glows subtly under the lighting, adding contrast and clarity. The environment is moody yet vibrant, with fog, sparkles, soft haze, and light flares. No club walls only freedom, rhythm, and sky. Cinematic, ultra-realistic style, fashion-forward, high-resolution photography feel. --ar 3:4 --v 7.0 10 5 5 1 1 1 8.8K 05:15" },
+  { cat: "Objetos & Arte", img: "prompt_057.jpg", prompt: "top down flatlay, wide-angled shot of letter-shaped mother of pearls forming the letter [letter]. Organic shapes and flowy vibe. The letters are lying in the sand and are partly sunken in. film grain, film look, fashion editorial vibes, moody and dusty vibes, sleek and moody, shot on Leica M6, Kodak Portra 400 film, subtle film grain, photorealistic texture, cinematic finish 16 4 3 1 1 8.2K edited 05:36" },
+  { cat: "Comida & Bebida", img: "prompt_058.jpg", prompt: "[dish name] on [color] [material] plate, soft window light from the side, clean minimal composition, [background color] background, shallow DOF, elegant natural food styling --ar 3:4 21 3 2 1 8.6K 08:37" },
+  { cat: "Animais", img: "prompt_059.jpg", prompt: "A cute chubby furry cat holds a bouquet of white daisies and small yellow wildflowers, holds the flowers towards the camera, and stands on lush green grass. The chubby cat smiles at the camera. The composition is focused on the lower third of the picture, with rolling emerald green hills extending to snow-capped mountains in the distance, under a cloud-dappled blue sky, bathed in golden morning light, fresh, soft focus and airy atmosphere. --ar 9:16 --v 7.0 10 9 3 2 2 9.1K 08:40" },
+  { cat: "Paisagens & Cidades", img: "prompt_060.jpg", prompt: "create one person doing vynasa yoga on a rooftop with columbus skyline on the background using colors of a sunsetn pink / purple --ar 3:4 9 4 2 2 8.3K 05:55" },
+  { cat: "Comida & Bebida", img: "prompt_061.jpg", prompt: "Close-up of two elegant martini glasses with olives, perfectly chilled, resting on a circular white tray atop a navy and white striped pool float, floating on crystal-clear turquoise water. Reflections of sunlight ripple across the surface, evoking a calm, upscale summer atmosphere. Luxury vacation aesthetic, minimal and refined composition, editorial cocktail photography, cinematic lighting, afternoon sun glow --ar 2:3 --v 7.0 --stylize 1000 12 2 1 8.7K 05:00" },
+  { cat: "Moda & Beleza", img: "prompt_062.jpg", prompt: "s   A before and after hair treatment photo of the back view of an attractive woman with long, brown, straight hair. The left side shows her frizzy and dry hair, with visible texture, while the right side has smooth, shiny hair with no residue from product use. The background color should be a neutral gray to highlight the hair transformation and make the products stand out. Use professional lighting for the shot. --ar 3:4 --raw --stylize 150 --v 7.0    A woman applying hair growth serum to her head, close-up of the oil dropper and bottle on top of her head, white background, hair roots slightly wet from pouring, brunette model with straight, long, sleek, shiny hair, hair is straight, long, and dark brown in color, flat lighting, realistic photography --ar 3:4 --raw --stylize 150 --v 7.0 13 12 1 1 1 8.9K 05:04" },
+  { cat: "Objetos & Arte", img: "prompt_063.jpg", prompt: "drone view of above and behind a woman playing tennis on a green tennis court, the back of the woman, mid-swing, mid-motion, holding a clean white tennis racket, 1980s white pleated mini tennis skirt, white tennis shoes, long dark brown hair, 1970s flicked outward curls, Wimbledon court 19 3 2 2 1 7.9K edited 07:09" },
+  { cat: "Comida & Bebida", img: "prompt_064.jpg", prompt: "a ice cream popsicle with the [brand] logo on it, in light pink and gold colorway, with dripping texture, decorated by small metallic gold foil on its surface, very detailed 19 4 3 8.1K 07:15" },
+  { cat: "Moda & Beleza", img: "prompt_065.jpg", prompt: "A slight top-down photo of the same beautiful k-pop idol feeling Korean woman in her 20's before and after her skin quality enhancement, taken with an iPhone in frontal view as a selfie. Shot inside a house. The left side shows that she has some dark circles and dark spots(severe freckles) under her eyes, dryness on the face. On the right-hand side, she is made up by a makeup artist and looks like having flawless and smooth skin with different mono-tone outfit. She looks expressionless has symmetrical face. Her hair color is black. Make sure you capture the full length from head to chest area. 9 9 4 1 7.9K 04:12" },
+  { cat: "Produtos & Publicidade", img: "prompt_066.jpg", prompt: "Jeff Koons [OBJECT] Sculpture, in high gloss chrome finish, standing on a black marbe stand in a luxuirous modern living room. 12 5 2 1 7.8K 04:07" },
+  { cat: "Produtos & Publicidade", img: "prompt_067.jpg", prompt: "nike Air Jordan 1 made of [material], kitbash3d, studio photography, stock photo, natural lighting, product view, 8k, Shot on 65mm, --ar 2:3 --v 7.0 --stylize 50 13 6 3 2 1 1 7.3K 06:12" },
+  { cat: "Objetos & Arte", img: "prompt_068.jpg", prompt: "A cozy workplace with a computer on the table, a cup of coffee next to it, and a few macaroons on a small plate --sref 4271215301 355384905 2601618513 3484190848 12 8 1 1 7.2K 05:08" },
+  { cat: "Moda & Beleza", img: "prompt_069.jpg", prompt: "ultra-close-up beauty portrait of a young woman with moistened skin, natural skin texture with visible pores and slight glow, moist natural lips in light rose, sharp heterochromia eyes with clear catchlight, white background, high-key beauty lighting with soft frontal fill and rim backlight, orchid flower near face, soft highlights on cheekbones and nose, no retouching effect, commercial skincare ad aesthetic, medium format camera look --ar 9:16 25 2 2 2 2 8.5K 06:38" },
+  { cat: "Comida & Bebida", img: "prompt_070.jpg", prompt: "A sofa made of [fruit], against a white background, hyper-realistic photography. 15 4 2 7.3K 07:43" },
+  { cat: "Paisagens & Cidades", img: "prompt_071.jpg", prompt: "modern beach whit sunbeds, cinematic lighting, ultra-detailed, 8K resolution --ar 16:9 7 6 2 1 7.5K 08:22" },
+  { cat: "Paisagens & Cidades", img: "prompt_072.jpg", prompt: "A sleek, ultra-modern convertible sports car driving on a vibrant Dubai street during a sunny day, no people, futuristic design, glossy metallic finish, palm trees and luxurious skyscrapers in the background, bright blue sky, dynamic angle, cinematic lighting, highly detailed, photorealistic, 8k resolution --ar 3:4 13 2 8.3K 08:25" },
+  { cat: "Icones & UI", img: "prompt_073.jpg", prompt: "3D render of a light [color] twisted shape with soft gradient, smooth curves, rounded edges, and glossy plastic texture. Matte finish. No shadows. White background. Minimal icon style --s 250 --v 6.1 8 7 2 1 7.9K 04:39" },
+  { cat: "Moda & Beleza", img: "prompt_074.jpg", prompt: "A high-fashion beauty collage showcasing three elegant and trendy makeup looks for a stylish evening in 2025. The first section features a radiant, sun-kissed look with soft golden tones, luminous skin, warm bronze eyeshadow, and a natural glossy lip. The second section presents a dramatic evening style with deep, smoldering eyeshadow, bold eyeliner, and a matte lip for a striking effect. The third section highlights a soft and romantic aesthetic with subtle rosy blush, delicate pink tones, and a fresh, dewy glow. The collage is arranged in a sleek editorial composition, blending modern beauty trends with warm golden and moody lighting, enhancing depth and texture. Ultra-detailed textures, cinematic beauty photography, crisp high-end editorial finish, no text, no watermark 11 4 3 1 8.3K 04:48" },
+  { cat: "Objetos & Arte", img: "prompt_075.jpg", prompt: "A real pink helicopter. A huge number of delicate pink roses are spilling out of the helicopter cargo hold. It's summer. There's a blue sky and green grass in the background. Super-realistic photo, hyper-realistic, ultra-detailed textures, cinematic photography, crisp high-end editorial finish, no text, no watermark --ar 3:4 7 6 3 2 2 1 8.4K 04:37" },
+  { cat: "Animais", img: "prompt_076.jpg", prompt: "Photo of a (breed) peeking over the edge, eye-to-eye with (object) on a white table, against a simple solid white background. The image is cute and quirky, with a minimalistic style 9 2 2 1 8.6K 04:54" },
+  { cat: "Paisagens & Cidades", img: "prompt_077.jpg", prompt: "Realistic lightning bolt striking over city skyline, dark storm clouds, bright electric flash illuminating buildings, dramatic weather photography, urban landscape during thunderstorm, professional lightning photography, natural lighting effects, photorealistic storm scene --ar 16:9 6 5 2 2 2 8.7K 08:59" },
+  { cat: "Comida & Bebida", img: "prompt_078.jpg", prompt: "ultra-realistic [FRUIT] fully encased inside a clear ice cube with sharp, geometric edges, [FRUIT_DESCRIPTION] visible through the frozen surface, small frost particles and air bubbles inside, placed on clean white background, professional product photography lighting, macro-level texture detail, minimalist commercial composition --s 250 13 6 5 2 1 8.2K 07:14" },
+  { cat: "Paisagens & Cidades", img: "prompt_079.jpg", prompt: "Modern luxurious kitchen with marble island, vertical wooden slat paneling, minimalist pendant globe lights, olive green velvet barstools with black metal frames, mesh sliding doors, clean white walls, high ceilings, elegant marble backsplash, soft ambient lighting, architectural interior photography, high-end design, neutral color palette, warm wood tones, ultra-realistic rendering, professional interior design, glossy marble surfaces --ar 4:5 --profile 61y35wu --v 7.0 12 9 1 1 6.9K 06:27" },
+  { cat: "Produtos & Publicidade", img: "prompt_080.jpg", prompt: "professional photograph, advertisng, eye level shot, three quarters angle of a a mercedes beside angular brutalist architecture, camera positioned slightly off-center, building makes graphic shapes with shadows, Canon R5 camera, 50mm f.2.8 , hard sunlight creating sharp shaddows --ar 4:3 --p a28eow3 --s 0 --v 6.1 12 7 2 1 7.6K edited 05:09" },
+  { cat: "Comida & Bebida", img: "prompt_081.jpg", prompt: "Create a vivid, high quality image on a white background of the following items on a plate: chocolate, grapes, onions, garlic, avocado, citrus, coffee, macadamia nuts, and walnuts --v 6.1 --ar 2:3 13 6 1 1 7.2K 09:01" },
+  { cat: "Animais", img: "prompt_082.jpg", prompt: "a close-up studio photo of a single pink calla lily flower with a pair of luxurious diamond rings on its green stem, white background, soft natural lighting, high-end jewelry advertisement, ultra-realistic, macro photography style, high detail, minimalistic composition, style photographic    prompt:  A hyper-realistic studio photo of a large blooming allium flower with delicate purple petals, placed on the left side of the frame. A luxurious square-cut diamond ring with a double halo and pavé band is carefully balanced on the curved green stem. Clean white background, soft studio lighting, sharp detail on the gemstone and flower texture, minimalistic high-end composition, luxury jewelry editorial style 12 10 3 2 1 7.8K 04:41" },
+  { cat: "Comida & Bebida", img: "prompt_083.jpg", prompt: "Ice latte cup mockup, high quality commercial layout, hard flash, in the style of Unsplash photography, flash light, hard shadows, noise. --no people --ar 3:4 --profile ucqtzut --stylize 40 --v 7.0 12 6 4 2 1 6.9K 04:58" },
+  { cat: "Objetos & Arte", img: "prompt_084.jpg", prompt: "pink letters [letter], inflatable, in watter^ cinematic, top view --ar 3:4 --v 7.0 10 6 4 2 1 7.3K 05:32" },
+  { cat: "Comida & Bebida", img: "prompt_085.jpg", prompt: "coctails set in the bar , high quality commercial layout, hard flash, in the style of Unsplash photography, flash light, hard shadows, noise. --no people --ar 3:4 --profile ucqtzut --stylize 40 --sref https://s.mj.run/Umjp4nApMLE 8 5 2 1 1 8.3K 05:14" },
+  { cat: "Paisagens & Cidades", img: "prompt_086.jpg", prompt: "a striking scene of a young woman walking down a winding path surrounded by vibrant green, fluffy grass fields. The solitary Woman, dressed in a white suit, contrasts starkly with the green landscape, giving the image a surreal and dreamlike quality. The path cuts smoothly through the terrain, inviting thoughts about solitude, direction, and individuality --ar 9:16 13 6 4 1 1 7.4K 10:12" },
+  { cat: "Objetos & Arte", img: "prompt_087.jpg", prompt: "Create a collectible vinyl figure. The a transparent robot shaped body is the base design, the entire figure is filled with flowers. 3D render, c4d, octane render, natural light and subtle shadows --ar 9:16 --v 7.0 21 2 7.7K 10:15" }
+];
+
+const promptDataPago = [
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_001.jpg", prompt: "Creative photo session\n\nWe generate you in a shirt against the background of a collage using this prompt:\n\n\nmodern editorial collage poster design. the background features four stacked rounded panels filled with black and white cinematic portraits of a stylish young person in different fashion poses. overlayed in the foreground is a high-quality full-color cutout of the same person wearing a red oversized shirt with black pants and sunglasses, striking a confident fashion pose. clean minimal design, no text, no typography, no letters, soft shadows, depth layering, high contrast lighting, premium magazine style, ultra realistic, 8k, professional poster composition." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_002.jpg", prompt: "Photo with peonies\n\nWe generate a beautiful photo with flowers using this prompt:\n\n\nUse the uploaded photo for your face, keep all features exactly: appearance, age, hair, eyes, skin tone and texture, facial proportions - do not change even 1%. The shot is hip-length, the body half-turned, looking straight into the camera - confidently feminine. The hair is in soft voluminous waves, individual strands are highlighted. Makeup: radiant tone, contouring of cheekbones, brown shadows with shading, thin liner, long eyelashes, nude lips. Medium size gold hoop earrings. Soft pink bodycon dress made of textured knit midi with open shoulders and neck - perfect for the figure, the texture of the knit is visible. In both hands there is a huge armful of snow-white peonies with voluminous lush buds and long green stems - the bouquet occupies the lower half of the frame. Light shine on collarbones and shoulders. Location: minimalistic modern courtyard - white pebbles on the ground, olive trees, matte black wall in the background. In the foreground, softly blurred leaves create depth. Diffused soft daylight, no hard shadows. Skin pores, realistic texture of knitting and peony petals, slight shine on the collarbones, natural sharpness of the face. Premium color correction: clean neutral with a slight warm shift, white peonies as a bright accent. Shot on an iPhone, realistic frame depth, light grain, no beauty filter, 9:16 format. Save your appearance, hair, eyes, age, skin tone and texture strictly from the uploaded photo - identical to the original" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_003.jpg", prompt: "Photo from the spaceship\n\nWe generate a photo in a spacesuit in space using this prompt:\n\n\nA cinematic, medium close-up shot of a young woman as in <<<image_1>>> standing in profile, gently resting her forehead against the metallic black visor of an off-white, mobile suit pilot helmet held in her gloved hands. She wears a detailed, futuristic white mobile suit pilot suit with subtle signs of wear and tear, including scuffs and grime textures. The lighting is soft, cool, and diffused, creating a melancholic and introspective mood with a palette of pale blues, stark whites, and pops of muted grey. The background is a blurred, minimalist sci-fi interior with sterile, light-toned architecture. Shot on a 85mm lens with a shallow depth of field, focusing sharply on her face and the texture of the helmet, high-quality digital photography, hyper-realistic, intricate details, soft cinematic highlights, ethereal atmosphere. Loose messy hair style. Visor should have no reflection of the photographer." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_004.jpg", prompt: "Photo with a bouquet in a cafe\n\nWe generate a photo in a very beautiful dress to match the color of the bouquet in a cafe using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Spontaneous photo on iPhone. Cinematic effect with grain. A woman with a smooth low bun, her head turned towards the bouquet, a look at the bouquet, a soft smile, a feeling of the real moment. One hand supports the cheek. Neat makeup: Long eyelashes, glossy lips. Stud earrings, cuff, thin chain with a cross, large watch. Pink satin dress with thin straps. A woman sits next to a huge bouquet of pink spray roses in a soft pink package, the bouquet occupies the lower right corner. Expensive street restaurant. The warm light of the golden hour, the natural, unstaged aesthetics of a smartphone, film grain, no retouching. Vertical format 9:16. --ar 9:16 --raw --style motion 50. Milky manicure, almond." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_005.jpg", prompt: "Photo at sunset\n\nWe generate a very aesthetic photo in which you hold the sun at sunset using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Preserve the face and silhouette from the reference as realistically as possible. The girl stands with her back to the camera on a stone pier by the sea, her head is turned to the right, her profile is visible. Looking at the sunset. The right hand is extended towards the horizon, the fingers are positioned as if holding the sun. The left shoulder is slightly exposed by a slipped white loose linen shirt, a light short skirt with ruffles and a thin gold chain. Beach curls hair. A bright sea sunset with backlight: the silhouette is slightly darkened, the contours of the face, shoulders and arms are highlighted with a warm orange glow. Rich gold, orange and deep blue shades, an endless sea with a sunny path, clouds illuminated from below, a textured stone pier. Soft medium shot from the back, sharp focus, cinematic atmosphere of the golden hour, high detail." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_006.jpg", prompt: "Photo in the park\n\nWe generate a photo on a park bench under a flowering tree using this prompt:\n\n\nKeep facial features unchanged, 100% similarity. Ultra-realistic photo on a smartphone. A girl sits on a light wooden bench in the park at night. Hair in beautiful waves. One hand lightly touches the hair, the head is turned to the right, the gaze is directed to the side, past the camera, a slight half-smile, long eyelashes, gloss on the lips. She is wearing a long, tight-fitting white dress with thin straps, silver high-heeled sandals, and a small silver clutch next to her. Behind are lush blooming trees with thick pink flowers, illuminated from below by the warm light of park lanterns, creating a beautiful contrast with the dark sky. In the background you can see green trees and elements of a park or embankment. Atmospheric night photography with soft warm lighting, slight natural blur and soft focus typical of a smartphone shot" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_007.jpg", prompt: "Gorgeous evening photo\n\nWe generate a very beautiful evening photo using this prompt:\n\n\nCinematic photorealistic portrait of a young woman, vertical 3:4 format.\n\nThe woman is sitting in the grass by the sea at night. In the background is a dark ocean, light mist, and a deep blue-black night sky. In the foreground, tall grass is softly out of focus to create a natural sense of depth.\n\nShe is wrapped in a white blanket with her shoulders exposed. She hugs herself with both arms, her head slightly tilted back, her eyes closed, and a calm, peaceful expression on her face.\n\nHer very long loose hair gently flows in the breeze.\n\nShot with direct flash at night: a bright on-camera flash illuminates the woman while the background remains dark. Her skin has a luminous, slightly wet look on her face, shoulders, and collarbones.\n\nSharp focus on the face and hair, ultra-high skin detail with natural pores and realistic texture, free of plastic or overly retouched skin.\n\nRAW camera aesthetic, sharp focus, cinematic night photography, subtle film grain, realistic digital noise, natural contrast, no AI look.\n\nAspect ratio: 3:4." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_008.jpg", prompt: "Photo on a yacht\n\nWe generate a male photo shoot from a yacht using this prompt:\n\n\nUse the uploaded photo for your face, keep all features exactly: appearance, age, hair, eyes, skin tone and texture, facial proportions - do not change even 1%. Shot from the waist up, a man sits relaxed on the bright deck of a yacht - holding a glass of champagne in one hand, a free, confident pose. The athletic build can be seen under the clothes. Dark brown loose linen shirt, white linen trousers - natural fabrics with visible linen texture. Canon G7X direct flash: characteristic bright highlights on the face, hands, shirt fabric and glass of champagne - slight overexposure in the foreground. The warm golden sunset light of golden hour mixes with the flash - a warm halo along the contour of the silhouette. The background remains darker and more cinematic: a light, minimalistic yacht deck, a deep dark blue sea with ripples, a dramatic evening sky with a clear horizon line - a warm sunset at the horizon turns into a dark blue above. The glare of a flash on a glass of golden champagne. Color palette: dark brown linen, white trousers, dark blue sea, golden sunset. Canon G7X compact camera aesthetic, lively spontaneous shot, characteristic grain of a compact camera, warm toning, no beauty filter, 9:16 format. Keep your appearance, hair, eyes, age, skin tone and texture strictly from the uploaded photo - identical to the original." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_009.jpg", prompt: "Photo with a flower\n\nWe generate a photo underwater with a beautiful pink flower using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Cinematic portrait of a girl with fine grain. She is in sea water up to her shoulders and her clothes are not visible. He holds in his hand a beautiful soft pink southern large flower near his face. The hair is wet and combed back. Daylighting with dimming. Background is out of focus. Looking at the camera" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_010.jpg", prompt: "On the balcony by the ocean\n\nWe generate an aesthetic photo by the ocean using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Ultra-realistic lifestyle photo. A girl on a balcony by the ocean, almost at full height, looks relaxed to the left. A careless voluminous bun with light bangs and loose strands. Light blue knitted off-shoulder mini dress with long sleeves, cream clutch on gold chain. Silver railings, dark blue ocean with waves, cloudy blue sky. Soft diffused light, cool palette, vibrant skin with pores, quiet luxury, without AI effect." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_011.jpg", prompt: "Photo near the cathedral\n\nWe generate a beautiful photo in Moscow with the cathedral in the background using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Filmed on iPhone. Selfie in Moscow. Dear Russian aesthetics. A girl in front of St. Basil's Cathedral in Moscow. Realism. A low-angle selfie composition, the cathedral rises sharply into the night sky behind her. The head is slightly tilted towards the shoulder and down with the chin towards the neck. Voluminous hair is thrown to one side. Length of hair under the collar of the jacket. She is wearing a black leather jacket with straight shoulders. On the eyes are small, narrow, rimless sunglasses. Don't blur the background. The raindrops are slightly visible on the jacket. Shot with flash in the dark." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_012.jpg", prompt: "Broken mirror\n\nWe generate a photo with a reflection in a broken mirror using this prompt:\n\n\nUse the exact same face from the reference image and generate a dark cinematic portrait with a concept that has never appeared in this entire series \u2014 the subject seen through the fractured geometry of a shattered mirror, the face multiplied and fragmented across dozens of broken mirror shards, each piece reflecting a slightly different angle of the same face simultaneously.\n\nThe subject positioned close and directly in front of a massive shattered mirror \u2014 the mirror surface broken into dozens of irregular fragments still held within their frame, each shard at a slightly different angle from the impact, each one catching and reflecting the face from a completely different perspective simultaneously. Some shards showing the full eye, others just the jaw, others a slice of the nose bridge, others reflecting only darkness or the cold key light source \u2014 the shattered mirror one face turning into a fractured mosaic of itself, simultaneously showing every angle of the same human face that a single photograph could never capture.\n\nThe largest central shard holds the most complete reflection \u2014 the face closest to straight on, the primary portrait within the portrait, eyes staring back through the broken glass with absolute still intensity. Surrounding shards fragmenting outward from the center each capturing a different sliver of the same face at different angles \u2014 some shards showing the face from slightly left, others from slightly right, some from above, some just catching the eye or the lip or the cheekbone in isolation. The fracture lines between shards - dark voids of absolute black between the glass pieces - creating a graphic web of darkness across the reflected face, dividing it into geometric fragments.\n\nThe mirror shards themselves are rendered at obsessive physical detail \u2014 the glass edges sharp and precisely fractured, some edges showing the thickness of the mirror glass as a thin silver line, the reflective silver backing of the mirror visible at broken edges, some shards showing tiny concentric crack lines radiating from the impact point, the glass surface of each shard catching its own micro-reflections and slight surface imperfections. Some smaller shards at the periphery having fallen slightly from the frame leaving dark rectangular voids in the mirror surface \u2014 negative spaces where reflection once existed." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_013.jpg", prompt: "Collage with peonies\n\nWe generate a beautiful collage with fresh flowers using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. A realistic collage of three selfies: the girl in the center of each frame takes a selfie and holds a bouquet of pink peonies. Top frame: body straight, glance to the side - to the right, slight smile. Smartphone in right hand near face. Medium: body turned, head straight, looking into the lens with a gentle smile. Smartphone at chin level. Lower: the body is slightly tilted forward, the head is turned to the left, the lips are closed in a kiss. Smartphone at chest level. Nude manicure. She's wearing a black ribbed jersey top with thin straps. Loose wavy hair. Background: beige wall, soft peach curtain. Post-processing: fine HDR, color correction (+20K), film grain 2%, sharpening on smartphone details and fabric texture, cozy cinematic look. visible pores, no plastic skin, no AI smoothing." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_014.jpg", prompt: "Photo on a board at sea\n\nWe generate a beautiful photo by the sea on a surfboard using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Photorealistic fashion portrait of a young woman on the ocean at sunset. Tanned skin with a dewy glow, wet hair standing straight behind her back. She is kneeling on a board by the water, looking left in profile, eyes closed, calm expression; both hands touch the hair behind the head. Black laconic bandage swimsuit. Calm sea, low horizon, smoky orange sky and soft sun overhead. Warm backlighting, light light on the face, cinematic contrast and soft haze. Premium beach-editorial photography, sharp subject, blurred background, shallow depth of field, warm orange-golden color correction. Medium-full shot from knees to head, camera low on the water, lots of open space in the sky. No anatomy distortion, extra fingers/limbs, blur, CGI, text, logos or watermarks." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_015.jpg", prompt: "Photo near the car with balls\n\nWe generate a creative photo near a car with toy balls using this prompt:\n\n\nConceptual editorial photography.\nvertical 2:3 everyday\nabsurdity with chromatic injection, hyper-realistic, deadpan humor, film finish COMPOSITION: three clearly separated horizontal bands - sky occupying the top 40%, an industrial building and the car across the middle 35%, and a sea of plastic balls across the asphalt in the bottom 25%. MAIN SUBJECT: a man (face of the reference person) standing beside the open driver's door of a battered car, body facing forward but HEAD TURNED AND TILTED UPWARD with an expression of weary resignation - the unmistakable \"why me\" look. One hand grips the door frame, the other holds a brown loather BRIEFCASE.\nHis posture is stiff and contained; he is not reacting dramatically, he is simply standing there accepting It. OUTFIT\n- the conceptual contrast: a cream-beige Harrington jacket, a white dress shirt, a black and white patterned tie, dark gray dress trousers and plain leather shoes. An entirely conventional office uniform, and that formality is what makes the chaos around him absurd. THE CAR: a weathered mustard-orange compact sedan from the late 1980s, rusted and dented with a sagging bumper and a yellow decorative side stripe, spare tires stacked on the roof. Its interior is COMPLETELY PACKED WITH BALLS UP TO THE CEILING, clearly visible through the rear window. THE BALLS: hundreds of matte plastic spheres in pink. green, blue, orange, yellow, purple and turquoise, POURING OUT of the open door in a cascade and then scattering across the asphalt in a progressively thinning distribution toward the foreground - this density gradient is what creates depth and suggests recent motion.\nSETTING: a modest Industrial\ncomplex - white and teal corrugated metal warehouse units. roller garage doors, a numbered panel on the right wall, a beverage vending machine on the left, and cracked asphalt.\nTurquolse blue sky with scattered cumulus clouds. LIGHTING direct midday sun from high and alightly right, casting hard defined shadows beneath the car and beneath EVERY\nINDIVIDUAL\nBALL - each throwing sphere Its own small\nshadow, which is what convincingly anchors them to the ground. High contrast. Palette: deliberate structural contrast - the environment in muted neutrals of beige, gray, dirty white and Industrial teal under a desaturated turquoise sky. and against that the SATURATED PRIMARY COLORS of the balls explode. All the color in the frame is confined to a single type of object. Shot on 35-50mm at chest height, pure frontal, deep depth of fleld with everything sharp from the foreground balls to the clouds. Fine film grain, medium-high contrast, selective safuration, slight green cast in the shadows, no logos, no brand names, 8k." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_016.jpg", prompt: "Photo in the mirror\n\nWe generate a home photo in the mirror using this prompt:\n\n\n@image_1 - exact reference for the model. Preserve her appearance 1:1: face, features, skin tone, hair, age, and body proportions. Create an ultra-realistic 4:5 mirror selfie. The model is in a deep squat in front of a large floor mirror: one knee raised, the other leg bent under her body. In her right hand, she holds a light-colored smartphone near her face; in her left, a dark brown clutch.\nShe is wearing a long sand-beige open-knit crochet dress with thin straps and a deep V-neckline, without a belt. Cream high-heel sandals with a thin stiletto heel, chunky bracelets, and long earrings. Her hair is straight and sleek.\nLight wall, gray carpeted floor, wooden mirror frame. Soft daylight, accurate reflection, natural anatomy. Skin must look as alive as possible: visible pores, slight imperfections, natural glow, with no filters and no heavy retouching.\nStyle: photorealistic smartphone mirror selfie, candid luxury fashion, realistic crochet texture, soft daylight, HDR.\nNegative prompt: altered face, mixed identity, plastic skin, wrong pose, distorted mirror, warped phone, deformed hands, extra fingers, fused legs, incorrect heels, different dress, belt, missing clutch, cartoon, text, logo, watermark, UI." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_017.jpg", prompt: "Photo by the sea\n\nWe generate a very beautiful photo by the sea using this prompt:\n\n\n@image_1 - exact reference for model and composition. Preserve her appearance 1:1: face, features, skin tone, hairstyle, figure, and proportions. Skin must be maximally natural: real pores, slight imperfections, fine hairs, and natural highlights, without beauty filters or plastic retouching. Create an ultra-realistic vertical fashion portrait 9:16 on a snowy-white tropical beach during the soft evening hour. The model sits on the sand with her back to the camera, one leg bent, torso slightly turned, head turned over the shoulder, calm confident gaze directed into the lens. She wears a long semi-transparent knitted dress in a muted silver-olive shade with thin straps and a very deep open back neckline. The fabric naturally hugs the figure, softly gathers in folds on the sand, and shows a realistic lace-like texture. Minimalist gold earrings, straight hair lies freely. Background: calm turquoise water, clean light sand, pastel sky with tender lilac-pink and blue shades. Warm sunset light softly illuminates the skin and body contours, slight cool ambient light from the sea, natural shadows, calm luxury-resort atmosphere. Camera at the level of the sitting model, angle from behind in 3/4, focus on face, open back, and dress texture, soft horizon blur, 85mm lens, shallow depth of field, cinematic color grading, luxury beach editorial, quiet elegance, photorealistic, HDR, 8K. Negative prompt: altered face, plastic skin, heavy retouching, wrong pose, closed-back dress, opaque fabric, distorted anatomy, extra limbs, deformed hands, unnatural spine, warped dress pattern, wet hair, harsh sunlight, crowded beach, buildings, props, text, watermark, UI." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_018.jpg", prompt: "Night photo by the sea\n\nWe generate an aesthetic photo next to a car on the seashore using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. The camera is opposite the trunk and the girl, she is looking straight into the camera. A girl sits on the edge of the open trunk of a Mercedes 222 AMG black without license plates on the street. She is wearing loose blue jeans, white sneakers, a tight white long sleeve with a deep cut on top and a cropped huge burgundy bomber jacket. The girl sits on the edge of the open trunk, her legs calmly hanging down. Hands in jacket pockets. The head is tilted back. Hair falls on your face from the wind. Looking into the distance at the orange dark sunset, the photo was taken from the side. Only part of the car is visible in the frame, the open trunk. The photo shows a car with an open trunk parked on the seashore. Shot on a canon g7x with flash. French square manicure. The shoes are not visible. Filmed in the dark" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_019.jpg", prompt: "On the tennis court\n\nWe generate a photoset on a tennis court using this prompt:\n\n\nUse the uploaded image as the SINGLE model reference. The woman in the photo is the exact model. Preserve her appearance with absolute precision. Identity Lock is the top priority. The face must be 100% identical to the reference. Do not change, improve, stylize, change age, or alter any facial features. Preserve exact eyes, eyebrows, eyelashes, nose, lips, jawline, cheekbones, ears, skin tone, facial proportions, expression, hairstyle, hairline, body proportions, and overall look. No deviations from the original.\nCreate a luxurious editorial lifestyle-fashion photograph on an outdoor tennis court. The model sits naturally on the court surface next to a tennis net: one leg bent, the other freely extended, a relaxed and elegant pose. She holds a bright yellow tennis ball near her ear as if talking on the phone, looking thoughtfully to the side. Several tennis balls are naturally scattered around her on the court.\nShe wears a black sleeveless tennis dress, a black Nike visor with a white logo, white Nike socks, and chunky white tennis sneakers. Minimal jewelry. Hair lies freely on her shoulders.\nWarm golden hour light, cinematographic lighting, soft shadows, shallow depth of field, atmosphere of expensive fashion editorial shooting, premium sportswear advertising campaign, natural skin texture with visible pores, ultra-realistic hair strands, rich contrast, soft bokeh, 85mm lens, aperture f/1.8, medium format camera quality, Vogue style, Harper's Bazaar, Saint Laurent Campaign, Nike Women Campaign, ultra-photorealism, HDR, 8K, masterpiece, award-winning fashion photography.\nNegative prompt: different face, identity change, face drift from reference, altered facial features, different hairstyle, different body proportions, different skin tone, beauty filter, plastic skin, heavy makeup, cartoon style, CGI, illustration, anime, low quality, blurriness, extra fingers, distorted hands, cropped body, body duplication, face duplication, watermark, logo, text." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_020.jpg", prompt: "Photo by the Mediterranean Sea\n\nWe generate a photo in a cafe near the Mediterranean Sea using this prompt:\n\n\n@Image1 - Exact model reference. Use the uploaded photo as the exact reference for the model. Preserve the appearance 1:1: facial features, eye shape and color, nose, lips, natural skin tone, body proportions, natural facial expression, gaze, and identity. Do not alter the model's face or appearance.\nThe woman from @Image1\u00a0is seated at a luxurious seaside caf\u00e9 overlooking the crystal-clear Mediterranean Sea, enjoying a cup of freshly brewed espresso. She is wearing an elegant light blue off-the-shoulder blouse, light-wash premium denim jeans, layered gold jewelry, and a white designer handbag. Her long, voluminous hair with soft natural sun-kissed highlights is styled in luxurious loose beach waves with a deep side part. The hair has natural root volume, a silky texture, healthy shine, and gently flows in the warm Mediterranean breeze, with a few delicate strands softly framing her face. In the background are turquoise waters, elegant white yachts, Mediterranean pine trees, and a refined coastal atmosphere.\nLifelike skin with visible pores and natural micro-texture, realistic fabric details, soft creamy bokeh, cinematic color grading, rich dynamic range, authentic sunlight, subtle reflections, and premium editorial lighting.\nJacquemus Campaign. Dior Riviera. Loro Piana Summer. Brunello Cucinelli Resort. Vogue Greece Editorial. Harper's Bazaar. Quiet Luxury. Mediterranean Lifestyle. Ultra Photorealistic. Full-Frame Camera. 85mm Lens. Kodak Portra 160. HDR. 8K.\nNegative Prompt: different face, altered appearance, short hair, straight hair, different hair color, lack of volume, plastic skin, CGI, artifacts, blur, text, logos, watermarks, low quality." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_021.jpg", prompt: "Sunset on the sea\n\nWe generate a beautiful collage with a sunset at sea using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. An expensive lifestyle moment captured on an iPhone 15 by chance, like a story. Photorealism, raw photo. Vertical triptych of three horizontal frames. Evening beach after sunset (blue hour), cold shades, a girl knee-deep in water at the surf line, wet sand, calm sea. Each frame has different natural movements: shooting from the back, in 3/4, in the last frame looking into the camera, the face is partially hidden by hair. Loose white oversized Chrome Hearts cotton T-shirt, lightly dampened, hip length. Light step in the water, relaxed posture. Hard smartphone flash, almost complete darkness, bright foreground, dark background, cold digital light, slight noise early 2000s. A narrow pink-violet stripe of sunset on the horizon, a calm dark sea. Aesthetics: candid beach moment, tumblr aesthetic, cinematic realism. Large frame, 35 mm, high ISO, light grain, no bokeh." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_022.jpg", prompt: "Photo at the waterfall\n\nWe generate a very aesthetic photo at a waterfall using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. The skin is damp from drops of water and fog. Hair is loose and damp. Light makeup: glossy lips with a brown outline, long eyelashes, delicate highlighter. Black swimsuit with cutouts, stud earrings, thin gold bracelet, milky manicure. A woman sits on a wet stone by a waterfall, her legs are extended and crossed at the ankles, her left hand is raised up, palm up, as if catching drops, her right hand is leaning back, her head is thrown back strongly, her eyes are closed. Tropical forest, majestic cascading waterfall, wet stones, fog. Soft diffused light. iPhone photo, casual lifestyle, Instagram/Pinterest aesthetic, RAW, light film grain, low exposure, sharp background, medium shot, full face, hyperrealism, 8K.\n\n\n\n\nKS" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_023.jpg", prompt: "Stylish photo\n\nWe generate photos with futuristic mirror sculptures using this prompt:\n\n\nTransform this image into a premium surreal fashion editorial while preserving the person's identity, facial features, hairstyle, skin tone, outfit, pose, body proportions, and camera angle exactly as they are. Do not replace any clothing,accessories, or facial details.Keep the subject perfectly sharp,photorealistic, and naturally blended.Create a realistic composition by surrounding the subject with large organic liquid chrome structures inspired by flowing metal, abstract biomorphic shapes, and futuristic sculptures. The chrome should appear to grow naturally around the subject without covering important body parts or the face. Add realistic reflections, soft shadows, depth, and perspective so the metallic forms feel physically present.Maintain a clean minimal background while integrating the chrome elements into the environment. Use soft natural daylight with cinematic contrast and subtle highlights Keep a luxury fashion magazine aesthetic similar to Vogue, Num\u00e9ro, and Highsnobiety editorials.Preserve the original colors of the clothing and skin. Do not add extra people, text, logos, watermarks, or unnecessary objects. The final image shoule feel like a high-end Al fashion, campaign with ultra-realistic details, crisp textures, HDR quality, 8K resolution, editoria ) Made with Edits position, premium color grading, dramatic depth of field, and professional commercial photography." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_024.jpg", prompt: "Stylish photos in the subway\n\nLet's generate a cool photo on an escalator using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Filmed on iPhone. Low angle, camera from below on an escalator, hips leaning forward, one arm bent at the elbow, a black quilted bag on a Chanel chain with silver fittings on the elbow, the other resting on the railing. The girl is wearing a tight-fitting T-shirt with a deep round neckline, black buggy jeans with a low rise, loose oversized straight. Background escalator in the subway/passage, metal handrails, steps, tiles, service signs in the distance, ceiling panels, people. The hair is brushed and thrown to one side over the shoulder. On the eyes there are small black oval glasses without frames. Skin slightly tanned. French manicure. On my hand is an expensive small women's steel watch. Low exposure, subdued warm light, shot with flash in the dark. Don't blur the background." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_025.jpg", prompt: "Photo in the car\n\nWe generate a blurry photo in the car using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Photorealistic night shot inside a car. The girl is sitting in the front passenger seat, shot in profile slightly from behind, body to the left, head thrown back, fingers at the neck, face indistinguishable due to strong motion blur. She is wearing a shining evening set in light silver color: a tight-fitting sleeveless top with a high neckline and a mini skirt, completely covered with rhinestones. Wide bracelet made of large rhinestones, long light nails. Random photo on a phone in a moving car, natural motion blur, slight defocus, low light, warm flash emphasizes skin, fabric and jewelry, background almost black. Outside the window there are blurry pink and purple neon lights and dark greenery. Dark interior, grainy smartphone, muted black and brown tones, sparkling highlights, close angle to the waist and above the knees, slight tilt of the frame, candid photo. Without clear detail of the face, look into the camera, studio light." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_026.jpg", prompt: "Creative photo session\n\nWe generate you in a shirt against the background of a collage using this prompt:\n\n\nmodern editorial collage poster design. the background features four stacked rounded panels filled with black and white cinematic portraits of a stylish young person in different fashion poses. overlayed in the foreground is a high-quality full-color cutout of the same person wearing a red oversized shirt with black pants and sunglasses, striking a confident fashion pose. clean minimal design, no text, no typography, no letters, soft shadows, depth layering, high contrast lighting, premium magazine style, ultra realistic, 8k, professional poster composition." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_027.jpg", prompt: "PROMPT RESULT\n\nTitle: Planner Girl Prompt\nCategory: AI Art\n\n(Prompt/Actions below )\n\n#Aiart\u00a0#kawaiiart\u00a0#plannergirl\u00a0#pastelaesthetic\u00a0#stickerdesign\u00a0#id_753\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_028.jpg", prompt: "If you're looking to expand your AI toolkit, let me introduce you to a few lesser-known gems:\n\n1. **RunwayML** - A creative suite that makes it easy to generate media and work with AI models without heavy coding knowledge. Great for video edits and effects.\n\n2. **Evolv AI** - This tool focuses on optimizing customer experiences using AI. Perfect for those in marketing and sales looking to understand user behavior better and fine-tune their strategies.\n\n3. **Pictory** - An AI video tool that transforms scripts into engaging short videos. Awesome for social media content creation when you need to quickly convey ideas visually.\n\nThese tools offer unique functionalities that can help enhance your projects significantly. Experiment with them and see what fits your needs!\n\n\nMade with Inside" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_029.jpg", prompt: "PROMPT RESULT\n\nTitle: Naruto T-Shirt Prompt\nCategory: T - Shirt\n\n(Prompt/Actions below )\n\n#TshirtDesign\u00a0#animetshirt\u00a0#narutodesign\u00a0#mangastyle\u00a0#graphictee\u00a0#id_770\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_030.jpg", prompt: "Full Prompt:\nCreate a masterpiece-quality cozy anime-inspired watercolor illustration of a beautiful young woman lying peacefully in a lush blooming garden while gazing lovingly at a cute cream-and-white rabbit. She has long wavy black hair, large expressive eyes, soft rosy cheeks, a tiny black bindi, delicate gold earrings, and a gentle warm smile. She is wearing a light cream floral dress with soft pink flower prints and elegant flowing sleeves. She rests her head on one hand, leaning close to the rabbit in a calm, affectionate pose. The rabbit has soft fluffy fur, large glossy eyes, and realistic gentle features. The garden is filled with blooming white daisies, pink roses, yellow wildflowers, lush green grass, and sunlit trees, with a rustic stone wall and wooden fence in the background. Warm golden-hour sunlight filters through the leaves, creating a dreamy, peaceful atmosphere with soft shadows and glowing highlights. Delicate watercolor textures, painterly brush strokes, storybook charm, cinematic composition, ultra-detailed flowers and foliage, fantasy realism, Studio Ghibli-inspired aesthetic, masterpiece artwork, 8K resolution." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_031.jpg", prompt: "PROMPT RESULT\n\nTitle: European Gelato Portrait\nCategory: Photo Editing\n\n(Prompt/Actions below )\n\n#photoedit\u00a0#portrait\u00a0#id_761\nCreator: \u20dd\ud835\udc00n\ud835\udc2c\ud835\udc21\ud835\udc2e\u2765\u27f5\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_032.jpg", prompt: "PROMPT RESULT\n\nTitle: Royal Bridal Portrait Prompt\nCategory: Photo Editing\n\n(Prompt/Actions below )\n\n#photoedit\u00a0#bridalportrait\u00a0#indianbride\u00a0#redlehenga\u00a0#royalwedding\u00a0#id_775\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_033.jpg", prompt: "PROMPT RESULT\n\nTitle: Chocolate Baby Fun Prompt\nCategory: Photo Editing\n\n(Prompt/Actions below )\n\n#photoedit\u00a0#portrait\u00a0#photoprompt\u00a0#Chocolatebaby\u00a0#id_789\nCreator: \u20dd\ud835\udc00n\ud835\udc2c\ud835\udc21\ud835\udc2e\u2765\u27f5\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_034.jpg", prompt: "Full Prompt:\nUltra-realistic adorable toddler photoshoot of a cute little Indian girl with two small pigtails, standing beside an enormous partially broken chocolate bar. Her cheeks, lips, hands, and clothes are playfully covered with melted chocolate, creating a funny candid moment. She hugs the giant chocolate bar with both hands while looking directly at the camera with an innocent, slightly mischievous expression. A giant adult hand gently holds the top of the chocolate bar from above, creating a playful miniature-scale illusion. Chocolate pieces and melted chocolate are scattered naturally across the clean floor. Warm beige studio background, soft diffused lighting, realistic skin texture, detailed hair strands, natural shadows, cinematic depth of field, professional commercial food photography, ultra-photorealistic, 8K, high detail, warm tones, realistic chocolate texture, vertical composition, 4:5 aspect ratio." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_035.jpg", prompt: "Ever tried tweaking a word in your AI art prompt? The difference can be massive. You might use \"vibrant\" instead of \"bright\" and suddenly a dull landscape transforms into an engaging scene. Changing \"portrait\" to \"cinematic portrait\" shifts the style drastically, creating completely different vibes. It\u2019s fascinating how just a little tweak can lead to unexpected results, isn\u2019t it? Embrace the little changes and see what unique outputs you can discover!\n\n\nMade with Inside" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_036.jpg", prompt: "PROMPT RESULT\n\nTitle: Soft Elegance Portrait Prompt\nCategory: Photo Editing\n\n(Prompt/Actions below )\n\n#beautyportrait\u00a0#softglam\u00a0#elegantportrait\u00a0#goldenhour\u00a0#photoedit\u00a0#id_801\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_037.jpg", prompt: "PROMPT RESULT\n\nTitle: Urban Denim Prompt\nCategory: Photo Editing\n\n(Prompt/Actions below )\n\n#photoedit\u00a0#denimstyle\u00a0#urbanportrait\u00a0#indianboy\u00a0#cinematicportrait\u00a0#streetwear\u00a0#id_773\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store\nNS" },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_038.jpg", prompt: "Vibe of the working week\n\nWe generate a photo of the sea with a laptop and coffee using this prompt:\n\n\nRealistic candid photo of [person from uploaded photo] standing chest-deep in rough ocean\nwater, surrounded by large breaking waves and white sea foam, no hat.\nIn one raised hand, held above the water, they hold an open dark grey/space-black laptop\nwith a visible Apple logo, angled towards their face as if working on it. In the other hand,\nraised at chest height, they hold a to-go coffee cup with a white lid and brown sleeve.Their expression is focused and slightly tired, looking down at the laptop screen. Only the\nhead, shoulders, and raised arms are visible above the waterline; the rest of the body is\nsubmerged. The ocean is turbulent with rolling waves and whitewater in the background, cool grey-blue-green color grading, overcast diffused daylight, slightly moody and dramatic lighting. Shot from a\ndistance with a slight telephoto compression, as if photographed candidly from the shore.Vertical composition, photorealistic, ironic \"always working\" meme aesthetic,\nno text overlays anywhere on the image." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_039.jpg", prompt: "Alcoholism\n\nWe generate what you would look like if you had been drinking for the last 10 years using this prompt:\n\n\nEdit only the face. Keep everything else unchanged.\n\n\nMake the person look like a heavy daily alcohol drinker for 5 years: significantly bloated face, swollen cheeks, fuller jawline, puffy neck, swollen eyelids, heavy eye bags and deep under-eye puffiness, facial redness, broken capillaries around the nose and cheeks, uneven dull skin, tired bloodshot eyes, mild premature aging, softer facial contours, reduced facial definition.\n\n\nPhotorealistic, believable, clearly the same person." },
+  { cat: "Moda & Beleza", slug: "moda-beleza", img: "prompt_040.jpg", prompt: "Photo of a man on a yacht\n\nLet's generate a cool photo on a yacht using this prompt:\n\n\nA confident man from reference photo stands facing the camera with a relaxed posture, his shoulders at ease and his weight leaning slightly to the left against an unseen boat railing. He has light eyes, a subtle closed smile, and neutral eyebrows, maintaining a deliberately posed, direct gaze. He wears a high-contrast, fully unbuttoned white linen shirt, his left arm extending down and out of frame, while his right arm rests tucked away, revealing only a gray wristband on his wrist. Above him in the foreground, the pristine, perfectly smooth matte off-white edge of a painted drywall boat canopy frames the top of the shot, while a new, ornate, curved baroque-style silver metallic piece enters the bottom left. Beyond the isolated subject, the expansive environment features deep blue-black choppy water in the midground, its surface ripples catching faint light reflections. The deep spatial background is dominated by a majestic suspension bridge centered in the distance, fully illuminated with vibrant vertical white light strips running down its cables, anchored by a dark, distant coastline densely dotted with warm golden-yellow and orange city lights. The breezy, energetic atmosphere of a night out on the water is defined by highly directional, bright, single-source artificial front lighting that perfectly mimics a direct camera flash. This hard light generates a dramatic, high contrast ratio, blowing out specular highlights on his forehead, the bridge of his nose, and the crisp folds of his white linen shirt, while carving harsh, deep black shadows with sharply defined edges under his chin, inside the shirt folds, and directly onto his bare chest from the collar. The cool-toned, complementary color palette effortlessly guides the eye from his brilliantly lit face and warm skin tone back toward the colorful bridge, leaving absolutely no ambient fill light to soften the dark night. Captured as a realistic digital photograph with clear influences from travel lifestyle nightlife imagery, the shot utilizes a straight-on perspective, boasting tack-sharp focus on the subject and noticeable digital noise grain across the deep background. The deep depth of field retains clarity across the entire seascape and cityscape, enhanced by contrast adjustments, a lowered black point, flash exposure compensation, and subtle color grading to boost the vivid background lights, with the entire composition ultimately framed in a 4:5 aspect ratio." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_001.jpg", prompt: "Beautiful infographics\n\nWe create a beautiful illustration on any of your topics using this prompt:\n\nCreate a high-level vertical illustration in the style of the Cutaway Educational Picture Book, a modern educational cutaway book. It should not be just a diagram or a realistic atlas, but a fascinating educational illustration that simultaneously shows the external shape of the object, internal structure, functional areas, operating principle and key knowledge.\n\nText in Russian.\n\nSubject\nHOW THE HEART WORKS\n\nAutomatic interpretation\nChoose the best way to visualize your theme yourself:\n\n* determine the object type;\n* select the main emphasis: structure, functions, operating principles, flows, zones or connections;\n* focus on the level \u201cunderstandable for children, interesting for adults\u201d;\n* if a strict cut is not suitable, use translucency, local section, layer-by-layer opening or enlarged fragments.\n\nFormat and composition\nVertical format 3:4.\n\nThe main object is large in the center, making the most efficient use of height. The external silhouette and internal structure must be read simultaneously.\n\nExplanations, arrows, enlarged details and information blocks should be distributed around the object. The composition should be rich but clear, balanced and easy to read on a vertical screen.\n\nContent\n\n* The object is recognizable at first sight.\n* Internal structures and functional areas are clearly separated.\n*Each key area has educational value.\n* Show the principle of operation and the relationship of parts.\n* Small characters or mini-scenes are acceptable to enliven the page.\n* Use arrows, numbering, short captions, facts and enlarged sections.\n* Lots of information, but without visual chaos.\n\nVisual style\nContemporary high quality children's non-fiction illustration:\n\n* natural lines of hand drawing;\n* soft book contours;\n* bright, clean and friendly palette;\n* high detail without overload;\n* clear structure without engineering rigidity;\n* balance between book illustration and infographics;\n* modern, fresh, professional look.\n\nTexture\nNo imitation of physical paper.\n\nDo not use:\n\n* paper texture;\n* printing noise;\n* aging;\n* folds, book seams;\n* strong graininess;\n* yellow tint of an old book.\n\nThe image should look like a modern digital page from a non-fiction book.\n\nText and markup\nShort Russian captions and explanations should be seamlessly integrated into the composition and aid understanding without obscuring the main subject.\n\nColor\nColors are automatically selected to match the theme:\nbright, soft, clean, with clear separation of layers and moderate accents.\n\nDon't create\n\n* realistic medical atlas;\n* industrial drawing;\n* a primitive children's picture;\n* decorative poster without explanation;\n* chaotic infographics;\n* cyberpunk interface;\n* aesthetics of an old or scanned book.\n\nGoal\nTo create a beautiful, detailed and easy to read page of a modern popular science book that both explains the structure and principle of the heart and makes you want to look at the details for a long time." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_002.jpg", prompt: "GTA VI processing\n\nLet's turn your regular photo into a GTA VI game frame using this prompt:\n\n\nTransform this exact image into a cinematic visual inspired by Grand Theft Auto VI. Preserve the original composition, facial features, pose, and subject identity while enhancing it with a polished next-generation video game aesthetic.\nApply hyper-realistic rendering with cinematic lighting, HDR effects, detailed skin textures and natural imperfections (not cartoonish), subtle stylization inspired by GTA VI character design, vibrant but controlled color grading (Miami/Vice City-inspired tones, warm highlights, teal shadows), depth of field and environmental atmosphere for immersion, clean, sharp focus with AAA video game quality.\nUse a grounded semi-realistic style inspired by GTA VI character design \u2014 modern, refined, and immersive, without exaggerated or comic-like features. Add balanced Miami/Vice City-inspired color grading with warm highlights, teal shadows, neon ambience, and atmospheric depth.\nInclude realistic depth of field and sharp AAA-quality focus to create the feel of a high-budget open-world game cutscene.\nIf applicable, enhance the background with a modern Vice City vibe, including neon lights, palm trees, luxury urban scenery, reflective streets, and cinematic sunset or night lighting.\nImportant requirements:\n\u2022 Do not convert into cartoon, comic, cel-shaded, or GTA V-style art\n\u2022 Avoid thick outlines or unrealistic proportions\n\u2022 Keep the subject recognizable and authentic\n\u2022 Maintain realism with only subtle stylization\nA realistic GTA VI-inspired render that looks like a character from a modern AAA open-world game." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_003.jpg", prompt: "Balloon font\n\nWe generate a beautiful font from balloons using this prompt:\n\n\nUltra-inflated glossy latex typography spelling \u201c[TEXT]\u201d, each letter constructed from oversized pneumatic balloon forms, tightly compressed together with visible tension wrinkles, pressure folds, stretched seams, and soft air-filled deformation.\n\n[INSERT COLOUR] rubber material with intense specular highlights and realistic reflective shine.\nLetters appear squashed and inflated simultaneously, creating an organic soft-body typography effect. [INSERT COLOUR] studio background.\n\nMinimalist experimental poster design. Macro studio lighting with strong reflections and deep shadows. Cinematic glossy texture, subtle surface imperfections, photorealistic soft-body simulation, inflated vinyl aesthetic, modern Blender 3D typography render, ultra-clean composition, centered framing, premium graphic design aesthetic, tactile rubber realism, high-detail compression artifacts, smooth rounded edges, abstract inflatable type sculpture.\n\n\n\n\nP" },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_004.jpg", prompt: "We bend reality\n\nWe generate a reality distortion effect in your photo using this prompt:\n\n\nTransform the uploaded image into a premium pixel stretch digital artwork while keeping the main subject perfectly sharp, detailed, and recognizable. Preserve the original identity, silhouette, lighting, and composition of the subject. Extract the colors, textures, and atmosphere from the image and extend them outward into smooth, flowing pixel-stretch ribbons that follow elegant curves and dynamic motion. Create seamless transitions between the original photo and the stretched areas, with no glitches, broken pixels, or harsh edges. The stretched pixels should look silky, fluid, and organic \u2014 like streams of color, light, paint, smoke, or energy flowing through the scene. Maintain realistic depth, shadows, reflections, and natural lighting. Enhance the image with cinematic contrast, vibrant HDR colors, ultra-sharp details, and a luxury digital art aesthetic. Style: Adobe Photoshop pixel stretch effect, liquid motion blur, flowing light trails, abstract energy waves, gallery-quality digital artwork, modern minimalist composition, cinematic photography, 8K ultra-high resolution, premium social media masterpiece. Keep the subject untouched and crystal clear while the environment transforms into artistic flowing motion." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_005.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: a ukiyo e inspired image displaying a tree with a dark blue, curved trunk and branches. the tree's leaves are stylized as numerous green, overlapping, circular forms, each intricately filled with white concentric lines that create a swirling effect. the background is a muted light beige, and a faint window reflection is discernable on the right side. a red rectangular seal with the Japanese text \"\u5929\u9f8d\u753b\" is prominently displayed in white at the bottom\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost\nM\nOZ" },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_006.jpg", prompt: "3D modeling\n\nWe turn your object or appearance into a screenshot from a 3D modeling application using this prompt:\n\n\nHigh-fidelity 3D software interface screenshot, Blender (dark theme) in developer/debug mode, ultra-detailed precision UI, hyper-realistic render + technical diagnostics overlay, crisp, high-resolution screen capture.\nBlender layout visible: top menu & workspace tabs (Layout, Modeling, Shading, Rendering), outliner (structured hierarchy), properties panel (render, materials, scene, camera expanded), timeline (frame indicators), left toolbar, bottom debug console.\n\nDeveloper overlays ON: FPS, frame time (ms), GPU/CPU usage, VRAM, polygon count (tris/verts), object stats, render samples, camera transform data.\nThree vertically stacked viewport panels (9:16): \u2022 Front (orthographic feel)\n\u2022 Three-quarter (slight perspective)\n\u2022 Side profile\n\nEach with grid, XYZ gizmo, bounding box, pivot, camera guides.\nSame objects in all panels, facial identity locked, neutral expression, anatomically consistent.\n\nUE5 + Octane hybrid rendering: cinematic lighting, path tracing, global illumination, ray tracing, soft shadows, subsurface scattering, accurate reflections.\nDebug material blend: photorealistic render + glowing wireframe + partial topology + subtle heatmap/normal hints, seamlessly merged.\n\nShader/node indicators visible: PBR nodes, texture slots (albedo/normal/roughness), floating debug labels, mesh density tags.\nViewport environment: dark gray gradient, fine grid, clean technical workspace.\n\nDense UI: compact icons, sliders, numeric values, toggles, sharp anti-aliased text, no empty space.\n\nTrue screen capture look, ultra-sharp, no DOF or blur." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_007.jpg", prompt: "3D modeling\n\nWe turn your object or appearance into a screenshot from a 3D modeling application using this prompt:\n\n\nHigh-fidelity 3D software interface screenshot, Blender (dark theme) in developer/debug mode, ultra-detailed precision UI, hyper-realistic render + technical diagnostics overlay, crisp, high-resolution screen capture.\nBlender layout visible: top menu & workspace tabs (Layout, Modeling, Shading, Rendering), outliner (structured hierarchy), properties panel (render, materials, scene, camera expanded), timeline (frame indicators), left toolbar, bottom debug console.\n\nDeveloper overlays ON: FPS, frame time (ms), GPU/CPU usage, VRAM, polygon count (tris/verts), object stats, render samples, camera transform data.\nThree vertically stacked viewport panels (9:16): \u2022 Front (orthographic feel)\n\u2022 Three-quarter (slight perspective)\n\u2022 Side profile\n\nEach with grid, XYZ gizmo, bounding box, pivot, camera guides.\nSame objects in all panels, facial identity locked, neutral expression, anatomically consistent.\n\nUE5 + Octane hybrid rendering: cinematic lighting, path tracing, global illumination, ray tracing, soft shadows, subsurface scattering, accurate reflections.\nDebug material blend: photorealistic render + glowing wireframe + partial topology + subtle heatmap/normal hints, seamlessly merged.\n\nShader/node indicators visible: PBR nodes, texture slots (albedo/normal/roughness), floating debug labels, mesh density tags.\nViewport environment: dark gray gradient, fine grid, clean technical workspace.\n\nDense UI: compact icons, sliders, numeric values, toggles, sharp anti-aliased text, no empty space.\n\nTrue screen capture look, ultra-sharp, no DOF or blur." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_008.jpg", prompt: "Odyssey\n\nLet\u2019s transform your appearance into a character from the acclaimed film \u201cOdyssey\u201d using this prompt:\n\n\nCinematic film still, low-angle medium close-up of [a person matching my uploaded reference photo] as an imposing ancient warrior. The subject wears a matte-black stylized Corinthian helmet with a tall black bristled crest, dark shoulder armor, and a thick black cape fastened by a dull gold circular medallion. Only the lower face and eyes are visible beneath the helmet, showing a stoic, serious expression while looking slightly downward. In the heavily blurred foreground on the right, the curved, faded red bristled crest of another helmet intrudes into the frame. The background consists of a soft, muted overcast blue-grey sky with faint diagonal ship rigging ropes visible on the far right. Soft diffused daylight, cool desaturated cinematic color grading, low contrast, 35mm film grain emulation, shallow depth of field, epic mythological mood, highly detailed, photorealistic, 8k. 4:5 Aspect ratio." },
+  { cat: "Objetos & Arte", slug: "objetos-arte", img: "prompt_009.jpg", prompt: "http://t.me/Prompts_library_bot/Promptlibrary\nTelegram\n\nPrompt Library\n\nThe Prompt Library is your go-to hub for trending and high-quality AI prompts \u00a0Discover the latest prompts for ChatGPT, image generation, marketing, content creation, c...\n\nLAUNCH" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_001.jpg", prompt: "Photos in nature\n\nWe generate an aesthetic photo against the backdrop of mountains and a river using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. A girl stands on a hillside against the backdrop of a picturesque valley with a winding river, dense green hills and forests. Profile, slight smile, gaze downward. The arms are spread wide apart, the pose conveys freedom and delight. Voluminous flowing hair, a few strands falling on the face. Light makeup: long eyelashes, lips with a clear contour and shine. Tanned glowing skin. White tight sports long sleeve and graphite sports leggings. In the foreground there is green grass and field plants, in the distance there is a panorama of the valley with a smooth bend of the river. Clear blue sky with large voluminous white clouds. Golden hour, warm backlight highlights hair strands and silhouette. Ultra-realistic premium lifestyle shot, live photo without retouching, natural skin details, cinematic depth and high detail." },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_002.jpg", prompt: "Photo with snowboard\n\nLet's generate a cool photo of snow-capped mountains on a snowboard using this prompt:\n\n\nA dynamic action shot of a snowboarder from the attached image with a hairstyle as shown in the photo wearing a modest, structured red-and-white patterned athletic top with extended coverage, matching winter snowboarding pants, and a gray backpack, carving swiftly down a steep, sunlit snowy mountain slope under a brilliant blue sky, kicking up a dramatic spray of powdery snow crystals with cinematic lighting." },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_003.jpg", prompt: "Night photo\n\nWe generate a beautiful night photo in the city using this prompt:\n\n\nMaintain appearance 100%. Do not change facial features or proportions. Night street-style shot with flash. The girl turns her back halfway, looking over her right shoulder at the camera. A messy high bun with strands near the face. White strapless top, linen shirt dropped off the shoulders, wide light blue jeans, red bag. Fox eyelashes, arrows, laminated eyebrows, matte pink lips, long square jacket. Night street with lanterns, shop windows and \"P\" sign. Paparazzi flash, candid, high detail, 8K." },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_004.jpg", prompt: "Chase in the desert\n\nWe generate a photo of you driving in the desert using this prompt:\n\n\nCreate an ultra-photorealistic 8K UHD RAW HDR automotive editorial photograph of a 1969 first-generation Chevrolet Camaro, glossy black body with a clean white roof, performing an aggressive high-speed powerslide on an open desert dirt road. Thick realistic dust erupts from the rear tires with natural turbulence, flying gravel and sharp tire tracks conveying extreme speed.\n\nA young male driver leans toward the open window, left arm casually resting on the door, right hand gripping the wheel. His face is clearly visible, sharp and unobstructed, eyes focused forward, calm confident expression, windblown hair, natural skin texture. No reflections, shadows, or glass obstructing his face.\n\nComposition: vertical 3:4, dramatic high-angle aerial front 3/4 view from approximately 45\u201370\u00b0 above, as if tracked by a drone. Car fills 75\u201380% of frame, white roof clearly visible, massive dust trail behind it, slight negative space ahead to emphasize motion.\n\nLighting: golden-hour sunset, warm directional light on the car and driver, subtle natural rim light, realistic glossy reflections, long dramatic shadows, perfectly balanced facial exposure.\n\nLook: premium automotive editorial photography, cinematic Kodak Portra 400 aesthetic, warm earthy tones, golden highlights, slightly cool shadows, natural saturation, medium contrast, high dynamic range, subtle analog film grain.\n\nVehicle: authentic 1969 Camaro proportions, pristine glossy black paint, white roof, classic five-spoke racing wheels, realistic torque deformation on rear tires, dust on lower body, crisp chrome and body-line details.\n\nCamera: Sony A1 II, FE 50mm f/1.2 GM, 50mm, f/2.8, 1/2500s, ISO 200, continuous AF, tracking/panning. Ultra-sharp focus on driver\u2019s face, hands, roof and front body; natural motion blur only on wheels and dust.\n\nEnvironment: vast barren desert landscape, clear warm sky, unobstructed horizon, cinematic atmospheric dust.\n\nQuality: physically accurate lighting, realistic reflections, natural skin, authentic vehicle materials, realistic dust simulation, true-to-life motion physics, hyper-detailed, cinematic, premium editorial, IMAX-quality realism.\n\nNegative: CGI, cartoon, anime, AI artifacts, low resolution, oversaturated colors, overprocessed HDR, blurry/obscured face, reflective glass over face, distorted car, warped panels, duplicated wheels, unrealistic dust, deformed hands/face, plastic skin, excessive sharpening, watermark, text, logo, cropped vehicle, out of frame, compression artifacts, ghosting." },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_005.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: Use the provided image as the first frame. Keep the surreal arctic landscape, the red house on the snowy shore, the frozen ground, scattered rocks, the distant houses, and the giant pastel planets in the sky exactly in the same composition. Continuous single shot, one-take. The camera slowly pushes forward with very subtle natural handheld breathing and tiny irregular human-like motion. Fine snow and loose frost drift gently across the ground, faint mist moves through the distance, and the cold light softly shifts over the snow and rocks. The giant planets remain mostly stable, with only a very slight atmospheric shimmer and slow glow variation. The house and landscape stay still and grounded. Dreamlike, quiet, cinematic, surreal, liminal atmosphere. No people, no new objects, no dramatic camera movement, no scene reconstruction\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost\nM\nR\nG" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_006.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: An anthropomorphic Russian Blue cat sitting quietly beside a large apartment window during a rainy evening, wearing simple wool pajamas and a cardigan, a warm cup of tea resting on the windowsill, countless apartment windows glowing across the city, reflections of rain running down the glass, the room lit only by a small table lamp, intimate solitude, authentic 1979 Kodak Kodachrome photography, natural 35mm grain, timeless cinematic realism\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_007.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: painting showcases white wildflowers and pampas on a sandy beach. the middle ground features a dynamic ocean with deep blue water and numerous white breaking waves. the background includes a clear light blue sky dotted with scattered white clouds and a faint, distant coastline on the right. Muted tones, delicate tonal transitions, soft brush strokes\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_008.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: countryside landscape in the style of David Hockney, rolling green hills, winding forest path, scattered farmhouses, fields with bright contrasting colors, tall tree in the center of the scene, horse standing beneath the tree, small stream winding through, cloudy sky with rain falling, wet surfaces, soft reflections, vibrant palette, bold lines, flat perspective, watercolor painting texture\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_009.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: an oil painting depicts a high angle view of a house and goats on a cliff overlooking a vast expanse of ocean under a cloudy sky. hang on a line near the house. several seagulls fly over the water. the artist's signature \"ella. megonsaly 2019\" is visible in the bottom left corner.\n\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_010.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: editorial fashion location photography, white coral sand beach, crystal clear turquoise ocean, Maldives or Seychelles atmosphere, soft midday diffused light, no people, wet sand reflection of sky, pale blue and white palette, shot on 35mm f/8, deep focus, minimal horizon, subtle grain\n\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost\nDA" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_011.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: A hidden emerald forest in Japan filled with towering moss-covered cedar trees, crystal-clear streams flowing over glowing stones, ancient wooden torii partially hidden among lush vegetation, soft rays of sunlight piercing the canopy, tiny floating spirits of light barely visible between the trees, cinematic anime film, magical realism, painterly masterpiece, breathtaking composition, ultra detailed, dreamlike atmosphere, authentic Japanese forest, leave upper area for text\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost\nOZ\nAK" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_012.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: Use the provided image as the first frame. Keep the surreal arctic landscape, the red house on the snowy shore, the frozen ground, scattered rocks, the distant houses, and the giant pastel planets in the sky exactly in the same composition. Continuous single shot, one-take. The camera slowly pushes forward with very subtle natural handheld breathing and tiny irregular human-like motion. Fine snow and loose frost drift gently across the ground, faint mist moves through the distance, and the cold light softly shifts over the snow and rocks. The giant planets remain mostly stable, with only a very slight atmospheric shimmer and slow glow variation. The house and landscape stay still and grounded. Dreamlike, quiet, cinematic, surreal, liminal atmosphere. No people, no new objects, no dramatic camera movement, no scene reconstruction\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost\nM\nR\nG" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_013.jpg", prompt: "DETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: An anthropomorphic Russian Blue cat sitting quietly beside a large apartment window during a rainy evening, wearing simple wool pajamas and a cardigan, a warm cup of tea resting on the windowsill, countless apartment windows glowing across the city, reflections of rain running down the glass, the room lit only by a small table lamp, intimate solitude, authentic 1979 Kodak Kodachrome photography, natural 35mm grain, timeless cinematic realism\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Paisagens & Cidades", slug: "paisagens-cidades", img: "prompt_014.jpg", prompt: "50%\nDETAILED PROMPT\n\n\nVersion Midjourney: 8.1\nPrompt: countryside landscape in the style of David Hockney, rolling green hills, winding forest path, scattered farmhouses, fields with bright contrasting colors, tall tree in the center of the scene, horse standing beneath the tree, small stream winding through, cloudy sky with rain falling, wet surfaces, soft reflections, vibrant palette, bold lines, flat perspective, watercolor painting texture\n\n\nMidjourney Bot\n\n\n\nJoin: @Midjourneyai1\u00a0| Boost" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_001.jpg", prompt: "Beautiful photos of your product\n\nWe generate your product with a beautiful background of your choice using this prompt:\n\n\nExtreme close-up overhead shot of [product from uploaded photo] nestled in the center of a dense pile of fresh ripe tomatoes with green stems, soft natural directional lighting creating gentle highlights and shadows on both the product and the surrounding tomatoes, shallow depth of field, product sharply in focus and slightly elevated above the produce, seamless organic surrounding pattern filling the entire frame with no visible background, high-end editorial product photography, hyperrealistic texture contrast between glossy tomato skin and product surface" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_002.jpg", prompt: "Promo of your product\n\nWe generate a very creative advertisement for your product using this prompt:\n\n\nClose-up macro shot of furry gloved hands in magenta pink fur with gold pointed nail tips, wearing an oversized green fleece coat, holding [subject from uploaded photo] up close to the camera, playful maximalist fashion editorial style, bold saturated colors, glossy gold jewelry details on the fur, soft studio lighting, high-fashion food photography, vibrant contrast between pink, green and gold" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_003.jpg", prompt: "Advertising poster\n\nWe generate an advertising poster for any of your products using this prompt:\n\n\nUse the uploaded product image as the single source of truth and create one outstanding vertical ad ready for a premium campaign.\nProduct Analysis\nSilently determine the category, function, audience, price segment, brand character, materials, colors, packaging, typography, logo, and main product advantage. Base all decisions solely on the photo reference.\nProduct DNA Protection\nPreserve the product 1:1: shape, proportions, packaging, logo, label, text, colors, materials, textures, finish, reflections, and all visible details. Do not alter, repaint, simplify, duplicate, or add fictional elements.\nCreative Selection\nSilently develop 5 ad concepts, evaluate them based on originality, brand alignment, realism, visual power, and product focus. Show only the strongest final concept.\nBrand Communication\nAdd:\n\u2014 brand logo or name;\n\u2014 one slogan of maximum 3 words;\n\u2014 one short additional phrase if necessary.\nLanguage \u2014 Russian or the brand's language. Typography must exactly match its style. Minimum text, no long explanations.\nVisual Direction\nBold, cinematic, and premium composition with the product as the main character. Realistic lighting, refined shadows, strong visual hierarchy, and thoughtful negative space.\nNo infographics, callouts, comparisons, extra icons, fake UI, visual noise, or random effects.\nResult: one clean vertical ad 4:5, only the final best version, no analysis." },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_004.jpg", prompt: "Promo of your product\n\nCreative advertising of your product in volleyball style using this prompt:\n\n\nDynamic playful product photography of [product from uploaded photo] frozen mid-air over a volleyball net, being spiked/hit by two diverse hands reaching from opposite sides of the net, solid vivid blue background with visible water splash/spray texture, bright saturated studio lighting, high-energy sports-ad composition, slight motion blur on the net strap, product sharply in focus, colorful bracelets and nail polish visible on one hand for a fun candid touch, bold graphic advertising aesthetic, high-resolution commercial photography, square or portrait crop" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_005.jpg", prompt: "PROMPT RESULT\n\nTitle: Gaming Room Selfie\nCategory: Gaming Banner\n\n(Prompt/Actions below )\n\n#photoprompt\u00a0#photoedit\u00a0#Gaming\u00a0#id_793\nCreator: \u20dd\ud835\udc00n\ud835\udc2c\ud835\udc21\ud835\udc2e\u2765\u27f5\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_006.jpg", prompt: "PROMPT RESULT\n\nTitle: Creative Art Logo Prompt\nCategory: Logo Design\n\n(Prompt/Actions below )\n\n#LogoDesign\u00a0#doodlelogo\u00a0#creativebranding\u00a0#watercolorlogo\u00a0#id_747\nCreator: Ankita\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_007.jpg", prompt: "PROMPT RESULT\n\nTitle: Luxury Vitamin C Serum Story\nCategory: Social Media\n\n(Prompt/Actions below )\n\n#story\u00a0#product\u00a0#id_764\nCreator: @Rtm_creator\n\nExplore more secret Prompts on our channel: @ai_prompt_store" },
+  { cat: "Produtos & Publicidade", slug: "produtos-publicidade", img: "prompt_008.jpg", prompt: "Full Prompt:\nCreate a premium 1:1 square Instagram skincare advertisement for a luxury Vitamin C brightening serum, inspired by high-end cosmetic campaign photography.\nFeature a clear cylindrical glass dropper bottle filled with translucent golden serum, positioned prominently on the right-center and slightly tilted backward. The bottle has a matte white rubber dropper, polished metallic gold collar, realistic glass refraction, crisp highlights, and visible golden serum. The front label should clearly read \u201cepielle Brightening Serum Vitamin C\u201d, with elegant citrus illustrations.\nUse a warm pale-yellow-to-vibrant-orange gradient background, transitioning from soft cream yellow on the left to rich glowing orange on the right.\nSurround the bottle with whole oranges, sliced oranges, a halved ruby grapefruit with detailed juicy pulp, sliced yellow lemons, and fresh green citrus leaves. Arrange the fruits naturally around the product while keeping the composition clean and premium.\nCreate a glossy golden-orange liquid surface beneath the bottle with a strong, realistic mirror reflection. Add frozen serum droplets and elegant liquid splashes around the bottle base. Emphasize realistic water physics, glass reflections, citrus peel pores, juicy pulp, and translucent serum.\nTypography & Graphic Layout\nKeep the left side clean for typography and the product dominant on the right.\nInclude:\n\u201cepielle\u00ae\u201d at top-left\n\u201cKOREAN BEAUTY\u201d underneath in small uppercase lettering\n\u201cRADIANCE IN EVERY DROP\u201d as a refined uppercase tagline\nLarge luxury serif headline: \u201cBRIGHTEN NATURALLY\u201d\n\u201cVitamin C Brightening Serum\u201d\nSupporting line: \u201cFor brighter, even & naturally glowing skin\u201d\nAdd three minimalist benefit blocks with elegant circular icons:\nBRIGHTENS\nDull skin & dark spots\nEVENS\nSkin tone\nBOOSTS\nHydration & glow\nAdd a refined \u201cDERMATOLOGICALLY TESTED\u201d outlined badge near the lower-left.\nAt the bottom, create four minimalist feature icons labeled:\nPARABEN FREE \u2022 SULFATE FREE \u2022 CRUELTY FREE \u2022 VEGAN FRIENDLY\nVisual Style\nUltra-high-end commercial skincare photography, luxury cosmetic advertising, premium editorial design, cinematic studio lighting, soft directional light from upper left, crisp highlights, warm golden glow, realistic glass refraction, glossy liquid reflections, shallow depth of field, subtle background bokeh, sophisticated typography, clean modern composition, vibrant citrus color palette, extremely detailed textures, realistic liquid physics, photorealistic 8K quality, studio-grade product photography, premium Instagram advertising aesthetic.\nAspect ratio: 1:1 square.\nAvoid: cluttered composition, distorted bottle, warped product label, illegible text, excessive typography, flat lighting, cartoon appearance, artificial-looking fruit, messy reflections, low-resolution textures, cheap-looking packaging." },
+];
+
+  const CATEGORY_SLUGS = {
+    'Comida & Bebida': 'comida-bebida',
+    'Moda & Beleza': 'moda-beleza',
+    'Produtos & Publicidade': 'produtos-publicidade',
+    'Paisagens & Cidades': 'paisagens-cidades',
+    'Animais': 'animais',
+    'Icones & UI': 'icones-ui',
+    'Objetos & Arte': 'objetos-arte'
+  };
+
+  const galleryData = promptData.map((item, index) => ({
+    img: `prompts/${encodeURIComponent(item.cat)}/${item.img}`,
+    cat: item.cat,
+    slug: CATEGORY_SLUGS[item.cat] || 'outros',
+    prompt: item.prompt
+  })).concat(promptDataPago.map((item) => ({
+    img: `prompts/pago/${encodeURIComponent(item.slug)}/${item.img}`,
+    cat: item.cat,
+    slug: item.slug,
+    prompt: item.prompt
+  })));
+
+  const galleryItems = [];
+
+  function createGalleryCard(item, index) {
+    const card = document.createElement('div');
+    card.className = 'gallery-item has-image';
+    card.dataset.tag = item.slug;
+    card.innerHTML = `
+      <div class="gallery-item-image">
+        <img src="${item.img}" alt="${item.cat} - Prompt ${String(index + 1).padStart(3, '0')}" loading="lazy">
+      </div>
+      <div class="gallery-item-prompt-top">
+        <span class="prompt-top-tag">${item.cat}</span>
+        <span class="prompt-top-name">Prompt #${String(index + 1).padStart(3, '0')}</span>
+      </div>
+      <div class="gallery-item-prompt-bottom">
+        <p>${item.prompt}</p>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      currentIndex = index;
+      openLightbox();
+    });
+    galleryItems.push(card);
+    return card;
+  }
+
+  const fragment = document.createDocumentFragment();
+  galleryData.forEach((item, index) => {
+    fragment.appendChild(createGalleryCard(item, index));
+  });
+  galleryGrid.appendChild(fragment);
+
+  if (galleryCount) {
+    galleryCount.textContent = `+${galleryData.length} prompts exclusivos`;
+  }
+
+  // === GALLERY STAGGER ANIMATION ===
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'scale(1)';
+        }, index * 50);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'scale(0.95)';
+    item.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    galleryObserver.observe(item);
+  });
+
+  // === GALLERY LIGHTBOX ===
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxTag = document.getElementById('lightboxTag');
+  const lightboxPrompt = document.getElementById('lightboxPrompt');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxCopy = document.getElementById('lightboxCopy');
+  let currentIndex = 0;
+
+  function openLightbox() {
+    const data = galleryData[currentIndex];
+    if (!data) return;
+    lightboxImage.src = data.img;
+    lightboxTag.textContent = data.cat;
+    lightboxPrompt.textContent = data.prompt;
+    lightboxCounter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(galleryData.length).padStart(2, '0')}`;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryData.length;
+    openLightbox();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length;
+    openLightbox();
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxNext.addEventListener('click', nextImage);
+  lightboxPrev.addEventListener('click', prevImage);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  lightboxCopy.addEventListener('click', () => {
+    navigator.clipboard.writeText(lightboxPrompt.textContent).then(() => {
+      lightboxCopy.textContent = 'Copiado!';
+      setTimeout(() => lightboxCopy.textContent = 'Copiar Prompt', 2000);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  // === GALLERY FILTER ===
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      galleryItems.forEach(item => {
+        const tag = item.dataset.tag;
+        if (filter === 'all' || tag.includes(filter)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // === STICKY CTA ===
+  const stickyCta = document.getElementById('stickyCta');
+  const gallerySection = document.getElementById('biblioteca');
+  
+  window.addEventListener('scroll', () => {
+    if (!gallerySection || !stickyCta) return;
+    const galleryRect = gallerySection.getBoundingClientRect();
+    if (galleryRect.top < 0) {
+      stickyCta.classList.add('visible');
+    } else {
+      stickyCta.classList.remove('visible');
+    }
+  });
+
+  // === ACCESS GRANTED MODAL ===
+  window.openAccessGranted = function () {
+    const modal = document.getElementById('accessModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const bar = modal.querySelector('.access-bar-fill');
+    if (bar) {
+      bar.style.animation = 'none';
+      void bar.offsetWidth;
+      bar.style.animation = '';
+    }
+  };
+  window.closeAccessGranted = function () {
+    const modal = document.getElementById('accessModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  // === UNLOCK MODAL ===
+  function showUnlockModal() {
+    const modal = document.createElement('div');
+    modal.className = 'unlock-modal';
+    modal.innerHTML = `
+      <div class="unlock-modal-content">
+        <button class="unlock-modal-close">✕</button>
+        <h3>Desbloqueie Acesso Completo</h3>
+        <p>+1000 prompts e +500 sites de IA por apenas R$34,90</p>
+        <div class="unlock-modal-pix">
+          <div class="unlock-modal-qr">
+            <img src="images/pix/qrcode-pix.png" alt="QR Code Pix">
+          </div>
+          <p class="unlock-modal-pix-label">Chave Pix (Mercado Pago):</p>
+          <div class="unlock-modal-pix-key">
+            <span>bac9d837-e097-407c-9461-173d0c922e6f</span>
+            <button class="unlock-modal-pix-copy" onclick="navigator.clipboard.writeText('bac9d837-e097-407c-9461-173d0c922e6f')">Copiar</button>
+          </div>
+        </div>
+        <div class="unlock-modal-buttons">
+          <button class="btn btn-primary" onclick="openAccessGranted()">Ja paguei, liberar acesso</button>
+          <a href="#precos" class="btn btn-ghost">Ver detalhes</a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    
+    setTimeout(() => modal.classList.add('active'), 10);
+    
+    modal.querySelector('.unlock-modal-close').addEventListener('click', () => {
+      modal.classList.remove('active');
+      setTimeout(() => modal.remove(), 300);
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+      }
+    });
+  }
+
+  // Add click to unlock on locked gallery items only
+  document.querySelectorAll('.gallery-item:not(.has-image)').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      showUnlockModal();
+    });
+  });
+
+  // === FULL-PAGE FOG ===
+  const fogCanvas = document.getElementById('pageFog');
+  if (fogCanvas) {
+    const fctx = fogCanvas.getContext('2d');
+    const fogPrefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function sizeFogCanvas() {
+      fogCanvas.width = window.innerWidth;
+      fogCanvas.height = window.innerHeight;
+    }
+    sizeFogCanvas();
+    window.addEventListener('resize', debounce(sizeFogCanvas, 150));
+
+    const fogPuffsFull = [];
+    for (let i = 0; i < 12; i++) {
+      fogPuffsFull.push({
+        x: rand(0, fogCanvas.width),
+        y: rand(0, fogCanvas.height),
+        vx: rand(-0.4, 0.4),
+        vy: rand(-0.25, 0.25),
+        r: rand(140, 320),
+        phase: rand(0, Math.PI * 2),
+        color: ['rgba(0,128,160,', 'rgba(0,96,128,', 'rgba(0,160,192,', 'rgba(0,96,96,', 'rgba(0,64,96,', 'rgba(0,128,192,', 'rgba(0,192,192,', 'rgba(0,80,128,', 'rgba(0,144,176,', 'rgba(0,112,144,', 'rgba(0,176,208,', 'rgba(0,72,112,'][i % 12]
+      });
+    }
+
+    function drawFog(t) {
+      const w = fogCanvas.width, h = fogCanvas.height;
+      fctx.clearRect(0, 0, w, h);
+      fctx.globalCompositeOperation = 'lighter';
+      fogPuffsFull.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -p.r) p.x = w + p.r;
+        if (p.x > w + p.r) p.x = -p.r;
+        if (p.y < -p.r) p.y = h + p.r;
+        if (p.y > h + p.r) p.y = -p.r;
+        const swell = 1 + Math.sin(t * 0.0015 + p.phase) * 0.25;
+        const g = fctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * swell);
+        g.addColorStop(0, p.color + '0.16)');
+        g.addColorStop(0.5, p.color + '0.07)');
+        g.addColorStop(1, p.color + '0)');
+        fctx.fillStyle = g;
+        fctx.beginPath();
+        fctx.arc(p.x, p.y, p.r * swell, 0, Math.PI * 2);
+        fctx.fill();
+      });
+      fctx.globalCompositeOperation = 'source-over';
+    }
+
+    if (!fogPrefersReduced) {
+      let fogStart = performance.now();
+      (function fogAnim(now) {
+        drawFog(now - fogStart);
+        requestAnimationFrame(fogAnim);
+      })(performance.now());
+    }
+  }
+
+  // === LOGO ELECTRIFY ===
+  const logoEls = document.querySelectorAll('.nav-logo');
+  logoEls.forEach((logo) => {
+    const img = logo.querySelector('.nav-logo-img');
+    if (!img || logo.querySelector('.logo-electrify')) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'logo-electrify';
+    logo.appendChild(canvas);
+    const lctx = canvas.getContext('2d');
+
+    function sizeLogoCanvas() {
+      const logoRect = logo.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+      const pad = 60;
+      const left = imgRect.left - logoRect.left - pad;
+      const top = imgRect.top - logoRect.top - pad;
+      const w = imgRect.width + pad * 2;
+      const h = imgRect.height + pad * 2;
+      canvas.width = Math.max(2, Math.round(w));
+      canvas.height = Math.max(2, Math.round(h));
+      canvas.style.left = Math.round(left) + 'px';
+      canvas.style.top = Math.round(top) + 'px';
+      return { pad };
+    }
+    sizeLogoCanvas();
+    window.addEventListener('resize', debounce(sizeLogoCanvas, 150));
+
+    const bolts = [];
+    const sparks = [];
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function spawnBolt() {
+      const w = canvas.width, h = canvas.height;
+      const pad = 40;
+      const imgW = Math.max(20, w - pad * 2);
+      const imgH = Math.max(20, h - pad * 2);
+      const edge = Math.floor(Math.random() * 4);
+      let x, y;
+      if (edge === 0) { x = rand(pad, pad + imgW); y = pad; }
+      else if (edge === 1) { x = pad + imgW; y = rand(pad, pad + imgH); }
+      else if (edge === 2) { x = rand(pad, pad + imgW); y = pad + imgH; }
+      else { x = pad; y = rand(pad, pad + imgH); }
+      let dx = (Math.random() - 0.5) * 2;
+      let dy = (Math.random() - 0.5) * 2;
+      if (Math.abs(dx) + Math.abs(dy) < 0.4) { dx = 1; dy = 0; }
+      const points = [{ x, y }];
+      const segs = Math.floor(rand(8, 16));
+      for (let i = 0; i < segs; i++) {
+        if (Math.random() < 0.3) {
+          dx = (Math.random() - 0.5) * 2;
+          dy = (Math.random() - 0.5) * 2;
+        }
+        const len = rand(3, 10);
+        x += dx * len;
+        y += dy * len;
+        points.push({ x, y });
+        if (Math.random() < 0.45) {
+          sparks.push({
+            x, y,
+            vx: dx * rand(0.5, 1.5),
+            vy: dy * rand(0.5, 1.5),
+            life: rand(0.6, 1)
+          });
+        }
+      }
+      bolts.push({ points, life: 1 });
+      if (bolts.length > 6) bolts.shift();
+    }
+
+    function drawLogoBolt(t) {
+      if (prefersReduced) {
+        lctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+      const w = canvas.width, h = canvas.height;
+      lctx.clearRect(0, 0, w, h);
+      lctx.globalCompositeOperation = 'lighter';
+      bolts.forEach((bolt, bi) => {
+        bolt.life -= 0.028;
+        if (bolt.life <= 0) return;
+        const alpha = bolt.life * 0.55;
+        lctx.strokeStyle = `rgba(178,255,255,${alpha})`;
+        lctx.lineWidth = 1.6;
+        lctx.shadowColor = '#B2FFFF';
+        lctx.shadowBlur = 16;
+        lctx.beginPath();
+        bolt.points.forEach((p, i) => {
+          if (i === 0) lctx.moveTo(p.x, p.y);
+          else lctx.lineTo(p.x, p.y);
+        });
+        lctx.stroke();
+        lctx.strokeStyle = `rgba(0,255,136,${alpha * 0.8})`;
+        lctx.lineWidth = 0.7;
+        lctx.shadowColor = '#00ff88';
+        lctx.shadowBlur = 22;
+        lctx.stroke();
+      });
+      sparks.forEach((s) => {
+        s.life -= 0.03;
+        if (s.life <= 0) return;
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vx *= 0.94;
+        s.vy *= 0.94;
+        lctx.beginPath();
+        lctx.arc(s.x, s.y, 1.4 * s.life, 0, Math.PI * 2);
+        lctx.fillStyle = `rgba(178,255,255,${s.life * 0.6})`;
+        lctx.shadowColor = '#B2FFFF';
+        lctx.shadowBlur = 10;
+        lctx.fill();
+      });
+      lctx.shadowBlur = 0;
+      lctx.globalCompositeOperation = 'source-over';
+      // limpar faíscas mortas
+      for (let i = sparks.length - 1; i >= 0; i--) if (sparks[i].life <= 0) sparks.splice(i, 1);
+      for (let i = bolts.length - 1; i >= 0; i--) if (bolts[i].life <= 0) bolts.splice(i, 1);
+    }
+
+    if (!prefersReduced) {
+      setInterval(() => {
+        const n = Math.random() < 0.4 ? 2 : 1;
+        for (let i = 0; i < n; i++) if (Math.random() < 0.65) spawnBolt();
+      }, 220);
+      let logoStart = performance.now();
+      (function logoAnim(now) {
+        const t = now - logoStart;
+        drawLogoBolt(t);
+        requestAnimationFrame(logoAnim);
+      })(performance.now());
+    }
+  });
+
+  // === LOGO 3D ORBIT (cursorOrbit) ===
+  const navLogo = document.querySelector('.nav-logo');
+  const logo3d = document.querySelector('.logo-3d');
+  if (navLogo && logo3d && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let orbitTargetX = 0, orbitTargetY = 0, orbitCurX = 0, orbitCurY = 0, orbitActive = false;
+    navLogo.addEventListener('mousemove', (e) => {
+      const r = navLogo.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      orbitTargetY = px * 14;
+      orbitTargetX = -py * 14;
+      orbitActive = true;
+    });
+    navLogo.addEventListener('mouseleave', () => {
+      orbitTargetX = 0;
+      orbitTargetY = 0;
+      orbitActive = false;
+    });
+    (function orbitLoop() {
+      const k = 0.12;
+      orbitCurX += (orbitTargetX - orbitCurX) * k;
+      orbitCurY += (orbitTargetY - orbitCurY) * k;
+      logo3d.style.transform = `rotateX(${orbitCurX.toFixed(2)}deg) rotateY(${orbitCurY.toFixed(2)}deg) translateY(${orbitActive ? 0 : -4}px)`;
+      logo3d.style.animation = orbitActive ? 'none' : '';
+      requestAnimationFrame(orbitLoop);
+    })();
+  }
+
+  // === HERO CONSTELLATION ===
+  const heroField = document.getElementById('heroField');
+  const heroMouseLight = document.getElementById('heroMouseLight');
+  if (heroField) {
+    const fctx = heroField.getContext('2d');
+    let stars = [];
+    let fmouse = { x: -9999, y: -9999 };
+    const COUNT = 70;
+
+    function resizeHero() {
+      const hero = document.querySelector('.hero');
+      const rect = hero.getBoundingClientRect();
+      heroField.width = rect.width;
+      heroField.height = rect.height;
+      stars = [];
+      for (let i = 0; i < COUNT; i++) {
+        stars.push({
+          x: Math.random() * rect.width,
+          y: Math.random() * rect.height,
+          r: Math.random() * 1.4 + 0.4,
+          sx: (Math.random() - 0.5) * 0.18,
+          sy: (Math.random() - 0.5) * 0.18,
+          tw: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    resizeHero();
+    window.addEventListener('resize', debounce(resizeHero, 150));
+
+    function drawHero() {
+      const w = heroField.width;
+      const h = heroField.height;
+      fctx.clearRect(0, 0, w, h);
+      stars.forEach(s => {
+        s.x += s.sx;
+        s.y += s.sy;
+        if (s.x < 0 || s.x > w) s.sx *= -1;
+        if (s.y < 0 || s.y > h) s.sy *= -1;
+        s.tw += 0.02;
+        const alpha = 0.25 + Math.abs(Math.sin(s.tw)) * 0.35;
+        fctx.beginPath();
+        fctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        fctx.fillStyle = `rgba(178,255,255,${alpha})`;
+        fctx.fill();
+      });
+      // connect stars to each other
+      for (let i = 0; i < stars.length; i++) {
+        for (let j = i + 1; j < stars.length; j++) {
+          const dx = stars[i].x - stars[j].x;
+          const dy = stars[i].y - stars[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            fctx.beginPath();
+            fctx.strokeStyle = `rgba(0,135,189,${0.1 * (1 - dist / 130)})`;
+            fctx.lineWidth = 0.5;
+            fctx.moveTo(stars[i].x, stars[i].y);
+            fctx.lineTo(stars[j].x, stars[j].y);
+            fctx.stroke();
+          }
+        }
+        // connect to mouse
+        const md = Math.sqrt((stars[i].x - fmouse.x) ** 2 + (stars[i].y - fmouse.y) ** 2);
+        if (md < 170) {
+          fctx.beginPath();
+          fctx.strokeStyle = `rgba(0,255,136,${0.35 * (1 - md / 170)})`;
+          fctx.lineWidth = 0.8;
+          fctx.moveTo(stars[i].x, stars[i].y);
+          fctx.lineTo(fmouse.x, fmouse.y);
+          fctx.stroke();
+        }
+      }
+      requestAnimationFrame(drawHero);
+    }
+    drawHero();
+
+    if (heroMouseLight) {
+      document.addEventListener('mousemove', (e) => {
+        const hero = document.querySelector('.hero');
+        const rect = hero.getBoundingClientRect();
+        const lx = e.clientX - rect.left;
+        const ly = e.clientY - rect.top;
+        fmouse.x = lx;
+        fmouse.y = ly;
+        if (rect.top < e.clientY && rect.bottom > e.clientY && rect.left < e.clientX && rect.right > e.clientX) {
+          heroMouseLight.style.opacity = '1';
+        } else {
+          heroMouseLight.style.opacity = '0';
+        }
+        heroMouseLight.style.left = lx + 'px';
+        heroMouseLight.style.top = ly + 'px';
+      });
+    }
+  }
+
+  // === HERO TYPING EFFECT ===
+  const heroTitle = document.getElementById('heroTitle');
+  if (heroTitle) {
+    const words = Array.from(heroTitle.querySelectorAll('.hero-word'));
+    const lines = Array.from(heroTitle.querySelectorAll('.hero-line'));
+    const heroCursor = document.getElementById('heroCursor');
+
+    const originals = words.map(w => w.dataset.text || w.textContent);
+
+    let li = 0, ci = 0, lastT = 0;
+    const speed = 120;
+
+    words.forEach(w => { w.textContent = ''; });
+    heroTitle.classList.add('is-anim');
+
+    function type(timestamp) {
+      if (!lastT) lastT = timestamp;
+      const elapsed = timestamp - lastT;
+      if (elapsed >= speed) {
+        lastT = timestamp;
+        const current = originals[li];
+        ci++;
+        words[li].textContent = current.slice(0, ci);
+        if (ci >= current.length) {
+          ci = 0;
+          li++;
+          if (li >= originals.length) {
+            heroTitle.classList.add('typed');
+            return;
+          }
+        }
+      }
+      requestAnimationFrame(type);
+    }
+    setTimeout(() => requestAnimationFrame(type), 1200);
+  }
+  const hero = document.querySelector('.hero');
+  let lastScrollY = window.pageYOffset;
+  window.addEventListener('scroll', debounce(() => {
+    if (!hero) return;
+    const y = window.pageYOffset;
+    const heroBottom = hero.offsetTop + hero.offsetHeight;
+    if (y < heroBottom) {
+      hero.classList.toggle('is-scrolling-up', y < lastScrollY);
+      hero.classList.toggle('is-scrolling-down', y > lastScrollY);
+    }
+    lastScrollY = y;
+  }, 40));
+});

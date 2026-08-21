@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>HubVision Bot - Passo a Passo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1a;
+      color: #e0e6ed;
+      line-height: 1.7;
+      padding: 40px;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 2px solid rgba(0,135,189,0.3);
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0087BD, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #8a96a3;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 35px;
+      page-break-inside: avoid;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #00d4ff;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(140,146,164,0.1);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #0087BD, #00d4ff);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #e8edf1;
+    }
+
+    .step-content {
+      padding-left: 40px;
+      color: #a0aab4;
+      font-size: 14px;
+    }
+
+    .code-block {
+      background: #0d1117;
+      border: 1px solid rgba(140,146,164,0.15);
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #00d4ff;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+
+    .code-block .comment { color: #5f6b76; }
+    .code-block .command { color: #7ee787; }
+
+    .warning {
+      background: rgba(255,193,7,0.08);
+      border: 1px solid rgba(255,193,7,0.2);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #ffc107;
+    }
+
+    .warning strong { color: #ffcd38; }
+
+    .success {
+      background: rgba(0,255,136,0.06);
+      border: 1px solid rgba(0,255,136,0.15);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #00ff88;
+    }
+
+    .info {
+      background: rgba(0,135,189,0.08);
+      border: 1px solid rgba(0,135,189,0.2);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #00d4ff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(140,146,164,0.1);
+      font-size: 13px;
+    }
+
+    th {
+      background: rgba(0,135,189,0.1);
+      color: #00d4ff;
+      font-weight: 600;
+    }
+
+    td { color: #a0aab4; }
+
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(140,146,164,0.1);
+      margin-top: 40px;
+      color: #5f6b76;
+      font-size: 12px;
+    }
+
+    .emoji { font-size: 16px; }
+
+    @media print {
+      body { background: #fff; color: #333; padding: 20px; }
+      .step { border-color: #ddd; background: #f9f9f9; }
+      .code-block { background: #f0f0f0; color: #333; border-color: #ddd; }
+      .header h1 { -webkit-text-fill-color: #0087BD; }
+      .section-title { color: #0087BD; }
+      th { background: #e8f4f8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>HubVision Prompt Collector Bot</h1>
+      <p>Guia completo de instalacao e uso</p>
+    </div>
+
+    <!-- PRE-REQUISITOS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#9881;</span> Pre-requisitos
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;">&#10003; Python 3.8+ instalado</li>
+            <li style="margin-bottom: 8px;">&#10003; Conta no Telegram</li>
+            <li style="margin-bottom: 8px;">&#10003; Acesso ao @BotFather</li>
+            <li style="margin-bottom: 8px;">&#10003; Grupos de IA no Telegram</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTE 1: CRIAR BOT -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128172;</span> Parte 1: Criar o Bot no Telegram
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <span class="step-title">Abra o Telegram e acesse @BotFather</span>
+        </div>
+        <div class="step-content">
+          No Telegram, pesquise por <strong>@BotFather</strong> e inicie uma conversa.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <span class="step-title">Crie um novo bot</span>
+        </div>
+        <div class="step-content">
+          Envie o comando:
+          <div class="code-block">/newbot</div>
+          O BotFather vai perguntar o nome do bot. Digite algo como:
+          <div class="code-block">HubVision Prompt Collector</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">3</span>
+          <span class="step-title">Escolha o username</span>
+        </div>
+        <div class="step-content">
+          Escolha um username unico (deve terminar com "bot"). Exemplo:
+          <div class="code-block">hubvision_prompt_bot</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">4</span>
+          <span class="step-title">Copie o TOKEN</span>
+        </div>
+        <div class="step-content">
+          O BotFather vai enviar uma mensagem com o token. Copie tudo que esta entre colchetes:
+          <div class="code-block">
+            1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+          </div>
+
+          <div class="warning">
+            <strong>IMPORTANTE:</strong> Guarde este token! Ele e a chave de acesso ao seu bot.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTE 2: CONFIGURAR -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128196;</span> Parte 2: Configurar o Bot
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">5</span>
+          <span class="step-title">Abra o arquivo config.py</span>
+        </div>
+        <div class="step-content">
+          Navegue ate a pasta do bot e abra o arquivo <strong>config.py</strong>:
+          <div class="code-block">
+            P:\LandingPage-PromptHub\telegram-bot\config.py
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">6</span>
+          <span class="step-title">Cole o token</span>
+        </div>
+        <div class="step-content">
+          Substitua "SEU_TOKEN_AQUI" pelo token que voce copiou:
+          <div class="code-block">
+            BOT_TOKEN = "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTE 3: INSTALAR -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128187;</span> Parte 3: Instalar e Executar
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">7</span>
+          <span class="step-title">Abra o terminal (CMD ou PowerShell)</span>
+        </div>
+        <div class="step-content">
+          <strong>Opcao A:</strong> No Explorador de Arquivos, clique na barra de endereco, digite <strong>cmd</strong> e pressione Enter.<br><br>
+          <strong>Opcao B:</strong> Pressione <strong>Win + R</strong>, digite <strong>cmd</strong> e pressione Enter.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">8</span>
+          <span class="step-title">Navegue ate a pasta do bot</span>
+        </div>
+        <div class="step-content">
+          <div class="code-block">
+            <span class="command">cd</span> P:\LandingPage-PromptHub\telegram-bot
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">9</span>
+          <span class="step-title">Instale as dependencias</span>
+        </div>
+        <div class="step-content">
+          <div class="code-block">
+            <span class="command">pip install</span> -r requirements.txt
+          </div>
+          Aguarde a instalacao finalizar.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">10</span>
+          <span class="step-title">Inicie o bot</span>
+        </div>
+        <div class="step-content">
+          <div class="code-block">
+            <span class="command">python</span> bot.py
+          </div>
+          Se tudo estiver correto, vera:
+          <div class="code-block" style="color: #7ee787;">
+            ========================================<br>
+            HubVision Prompt Collector<br>
+            ========================================<br>
+            Bot iniciado! Ctrl+C para parar.
+          </div>
+
+          <div class="warning">
+            <strong>Mantenha o terminal aberto!</strong> O bot precisa estar rodando para coletar prompts.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTE 4: ADICIONAR AOS GRUPOS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128101;</span> Parte 4: Adicionar o Bot aos Grupos
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">11</span>
+          <span class="step-title">Adicione o bot ao grupo</span>
+        </div>
+        <div class="step-content">
+          No Telegram, abra o grupo de IA e adicione o bot:<br><br>
+          1. Abra o grupo<br>
+          2. Clique no nome do grupo ( topo )<br>
+          3. Clique em "Membros"<br>
+          4. Clique em "Adicionar membres"<br>
+          5. Pesquise pelo username do seu bot<br>
+          6. Selecione e adicione
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">12</span>
+          <span class="step-title">Torne o bot ADMINISTRADOR</span>
+        </div>
+        <div class="step-content">
+          <div class="warning">
+            <strong>OBRIGATORIO:</strong> O bot precisa ser admin para detectar reacoes!
+          </div>
+          No grupo:<br>
+          1. Clique no nome do grupo<br>
+          2. Clique em "Membros"<br>
+          3. Toque no nome do bot<br>
+          4. Selecione "Tornar administrador"<br>
+          5. Confirme
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">13</span>
+          <span class="step-title">Pegue o ID do grupo</span>
+        </div>
+        <div class="step-content">
+          No grupo, envie:
+          <div class="code-block">/id</div>
+          O bot vai responder com o ID do grupo. Copie o numero.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">14</span>
+          <span class="step-title">Adicione o ID no config.py</span>
+        </div>
+        <div class="step-content">
+          Abra o config.py e adicione o ID:
+          <div class="code-block">
+            CHAT_IDS = [<br>
+            &nbsp;&nbsp;-1001234567890,  # Grupo IA Midjourney<br>
+            &nbsp;&nbsp;-1009876543210,  # Grupo DALL-E<br>
+            ]
+          </div>
+
+          <div class="info">
+            <strong>DICA:</strong> Se deixar CHAT_IDS vazio [], o bot coleta de TODOS os grupos onde esta presente.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">15</span>
+          <span class="step-title">Reinicie o bot</span>
+        </div>
+        <div class="step-content">
+          No terminal, pressione <strong>Ctrl+C</strong> para parar, depois rode novamente:
+          <div class="code-block">
+            <span class="command">python</span> bot.py
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTE 5: USAR -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#9989;</span> Parte 5: Usar o Bot
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-number">16</span>
+          <span class="step-title">Comece a coletar!</span>
+        </div>
+        <div class="step-content">
+          1. Veja uma mensagem com <strong>imagem + prompt</strong> no grupo<br>
+          2. <strong>Reaja com 👍</strong> na mensagem<br>
+          3. O bot automaticamente:<br>
+          &nbsp;&nbsp;&nbsp; - Baixa a imagem<br>
+          &nbsp;&nbsp;&nbsp; - Salva em <strong>prompts_library/grupo/</strong><br>
+          &nbsp;&nbsp;&nbsp; - Adiciona ao <strong>prompts_library.js</strong><br>
+          4. Pronto! O prompt ja esta na biblioteca do site
+        </div>
+      </div>
+    </div>
+
+    <!-- COMANDOS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128295;</span> Comandos Disponiveis
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Comando</th>
+            <th>Descricao</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>/start</strong></td>
+            <td>Mensagem de boas-vindas</td>
+          </tr>
+          <tr>
+            <td><strong>/id</strong></td>
+            <td>Mostra o ID do chat atual</td>
+          </tr>
+          <tr>
+            <td><strong>/stats</strong></td>
+            <td>Estatisticas da coleta</td>
+          </tr>
+          <tr>
+            <td><strong>/list</strong></td>
+            <td>Lista os ultimos prompts coletados</td>
+          </tr>
+          <tr>
+            <td><strong>/help</strong></td>
+            <td>Ajuda detalhada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ESTRUTURA DE PASTAS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128193;</span> Estrutura de Pastas
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <div class="code-block" style="line-height: 2;">
+            LandingPage-PromptHub/<br>
+            ├── prompts_library/<br>
+            │&nbsp;&nbsp; ├── nano_banana/<br>
+            │&nbsp;&nbsp; │&nbsp;&nbsp; ├── pair_0001.jpg<br>
+            │&nbsp;&nbsp; │&nbsp;&nbsp; ├── pair_0002.jpg<br>
+            │&nbsp;&nbsp; │&nbsp;&nbsp; └── ...<br>
+            │&nbsp;&nbsp; ├── midjourney_br/<br>
+            │&nbsp;&nbsp; └── ...<br>
+            ├── js/<br>
+            │&nbsp;&nbsp; └── prompts_library.js&nbsp;&nbsp;(atualizado automatico)<br>
+            └── telegram-bot/<br>
+            &nbsp;&nbsp;&nbsp; ├── bot.py<br>
+            &nbsp;&nbsp;&nbsp; ├── config.py<br>
+            &nbsp;&nbsp;&nbsp; ├── storage.py<br>
+            &nbsp;&nbsp;&nbsp; ├── requirements.txt<br>
+            &nbsp;&nbsp;&nbsp; └── collected_prompts/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── backup_prompts.json
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOLUCAO DE PROBLEMAS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128736;</span> Solucao de Problemas
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <strong>Bot nao responde comandos:</strong><br>
+          - Verifique se o token esta correto no config.py<br>
+          - Reinicie o bot<br><br>
+
+          <strong>Bot nao detecta reacoes:</strong><br>
+          - O bot precisa ser <strong>ADMINISTRADOR</strong> do grupo<br>
+          - O grupo precisa ter reacoes habilitadas<br><br>
+
+          <strong>Imagens nao sao salvas:</strong><br>
+          - Verifique se a pasta prompts_library existe<br>
+          - Verifique espaco em disco<br><br>
+
+          <strong>Erro "Module not found":</strong><br>
+          - Execute: pip install -r requirements.txt
+        </div>
+      </div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="emoji">&#128161;</span> Dicas
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          &#10003; Deixe o terminal aberto o tempo todo para nao perder prompts<br><br>
+          &#10003; Use /stats periodicamente para ver quantos prompts coletou<br><br>
+          &#10003; O emoji de reacao pode ser alterado no config.py<br><br>
+          &#10003; O backup e salvo automaticamente em collected_prompts/
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      HubVision - Prompt Collector Bot<br>
+      Gerado em: <span id="date"></span>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('date').textContent = new Date().toLocaleDateString('pt-BR');
+  </script>
+</body>
+</html>

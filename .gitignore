@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build files
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+tmp/
+temp/
+
+# Local authentication data
+server/data/
+.env
+.env.local
+
+# Telegram account credentials and sessions
+telegram-bot/.env
+telegram-bot/*.session
+telegram-bot/*.session-journal
+telegram-bot/processed_reactions.json
+
+# Prompts images (too large for git)
+prompts/pago/
+prompts/gratis/
+
+# Temporary/work files
+.freebuff/
+favoritos_*.html
+favoritos_parsed.json
+scripts/__pycache__/
+
+# 3D models
+icons/3dsvg*.glb

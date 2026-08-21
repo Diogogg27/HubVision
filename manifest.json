@@ -1,0 +1,37 @@
+{
+  "name": "HubVision - Biblioteca de Prompts para IA",
+  "short_name": "HubVision",
+  "description": "Biblioteca de prompts para IA e +25 sites de IA para Midjourney, DALL-E, ChatGPT, Stable Diffusion, Claude e mais.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#0087BD",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/favicon/Ativo 59ARQUIVO.png",
+      "sizes": "17x17",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon/Ativo 69ARQUIVO.png",
+      "sizes": "33x33",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon/Ativo 66ARQUIVO.png",
+      "sizes": "65x65",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/android/Ativo 64ARQUIVO.png",
+      "sizes": "193x191",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/android/Ativo 51ARQUIVO.png",
+      "sizes": "718x713",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,854 @@
+127.0.0.1 - - [17/Aug/2026 08:43:37] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /images/pix/qrcode-pix.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /images/logo/hub-command-3d.svg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /js/prompts_dataset.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:42] "GET /js/main2.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:44] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:44] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:55] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:55] "GET /prompts/moda-beleza/prompt_001.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:55] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:55] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:55] "GET /prompts/objetos-arte/prompt_004.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:55] "GET /prompts/objetos-arte/prompt_003.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:55] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:55] "GET /prompts/icones-ui/prompt_002.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/comida-bebida/prompt_005.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/objetos-arte/prompt_008.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/comida-bebida/prompt_007.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/produtos-publicidade/prompt_011.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/comida-bebida/prompt_009.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/produtos-publicidade/prompt_012.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:56] "GET /prompts/moda-beleza/prompt_010.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/objetos-arte/prompt_014.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/paisagens-cidades/prompt_015.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/animais/prompt_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:57] "GET /prompts/icones-ui/prompt_018.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:58] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:58] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:58] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:58] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:43:58] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:43:58] "GET /prompts/animais/prompt_023.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:43:58] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:44:00] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:44:00] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:44:00] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:44:00] "GET /icons/apple/apple-touch-icon-180x180.png HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:44:00] "GET /icons/favicon/favicon_48x48.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:44:00] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:44:00] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:32] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/moda-beleza/prompt_001.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/icones-ui/prompt_002.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_004.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_003.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/comida-bebida/prompt_005.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/comida-bebida/prompt_007.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_008.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/comida-bebida/prompt_009.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/moda-beleza/prompt_010.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/produtos-publicidade/prompt_012.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/produtos-publicidade/prompt_011.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_014.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:42] "GET /prompts/paisagens-cidades/prompt_015.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/icones-ui/prompt_018.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:43] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:43] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/produtos-publicidade/prompt_025.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/moda-beleza/prompt_026.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/moda-beleza/prompt_028.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/animais/prompt_027.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_029.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_030.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_031.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_032.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_035.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_036.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_034.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_033.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/icones-ui/prompt_037.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_039.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_038.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/moda-beleza/prompt_040.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_041.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_042.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_043.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_044.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/moda-beleza/prompt_045.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/produtos-publicidade/prompt_046.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/comida-bebida/prompt_047.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:48] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:48] "GET /prompts/objetos-arte/prompt_048.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:51] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:45:51] "GET /icons/apple/apple-touch-icon-180x180.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:45:51] "GET /favicon.ico HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:45:54] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:45:54] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:45:56] "GET /favicon.ico HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:45:56] "GET /icons/apple/apple-touch-icon-180x180.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:46:57] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:46:57] "GET /icons/apple/apple-touch-icon-180x180.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:46:57] "GET /favicon.ico HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:08] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:09] "GET /css/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:09] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:09] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:09] "GET /js/main2.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/icones-ui/prompt_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/moda-beleza/prompt_001.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/objetos-arte/prompt_004.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/objetos-arte/prompt_003.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/comida-bebida/prompt_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/objetos-arte/prompt_008.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/comida-bebida/prompt_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/comida-bebida/prompt_009.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/moda-beleza/prompt_010.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/produtos-publicidade/prompt_012.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:22] "GET /prompts/produtos-publicidade/prompt_011.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/objetos-arte/prompt_014.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/paisagens-cidades/prompt_015.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/icones-ui/prompt_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:23] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:51:23] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:51:29] "GET /prompts/pago/moda-beleza/prompt_001.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:29] "GET /prompts/pago/moda-beleza/prompt_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:29] "GET /prompts/pago/icones-ui/prompt_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:29] "GET /prompts/pago/comida-bebida/prompt_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:51:45] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:52:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:06] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:06] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:06] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:06] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:06] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:07] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:07] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:07] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:07] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:52:07] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:52:07] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/moda-beleza/prompt_028.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/produtos-publicidade/prompt_025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_030.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/animais/prompt_027.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/moda-beleza/prompt_026.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_029.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_032.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_035.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_036.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_033.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_038.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/icones-ui/prompt_037.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_039.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/moda-beleza/prompt_040.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_041.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_042.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_044.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_043.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/moda-beleza/prompt_045.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/produtos-publicidade/prompt_046.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/comida-bebida/prompt_047.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:06] "GET /prompts/objetos-arte/prompt_048.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/paisagens-cidades/prompt_052.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/produtos-publicidade/prompt_054.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/animais/prompt_051.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/produtos-publicidade/prompt_049.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/produtos-publicidade/prompt_050.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/animais/prompt_053.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/paisagens-cidades/prompt_060.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/comida-bebida/prompt_058.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/animais/prompt_059.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/objetos-arte/prompt_057.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/paisagens-cidades/prompt_056.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/comida-bebida/prompt_055.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/comida-bebida/prompt_061.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/moda-beleza/prompt_062.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/objetos-arte/prompt_063.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/comida-bebida/prompt_064.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/moda-beleza/prompt_065.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/produtos-publicidade/prompt_066.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/produtos-publicidade/prompt_067.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/objetos-arte/prompt_068.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/moda-beleza/prompt_069.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/paisagens-cidades/prompt_071.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/paisagens-cidades/prompt_072.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:10] "GET /prompts/comida-bebida/prompt_070.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/objetos-arte/prompt_075.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/comida-bebida/prompt_078.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/animais/prompt_076.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/moda-beleza/prompt_074.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/icones-ui/prompt_073.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/paisagens-cidades/prompt_077.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/paisagens-cidades/prompt_079.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/produtos-publicidade/prompt_080.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/comida-bebida/prompt_083.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/comida-bebida/prompt_081.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/animais/prompt_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/objetos-arte/prompt_084.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/comida-bebida/prompt_085.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/paisagens-cidades/prompt_086.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/objetos-arte/prompt_087.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_003.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_004.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_006.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_008.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:13] "GET /prompts/pago/moda-beleza/prompt_009.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 08:53:24] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 08:53:31] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:32] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:32] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:32] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:32] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:32] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:33] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:33] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:33] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:33] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:33] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:33] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:33] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:33] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 08:53:33] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 08:53:33] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:14:48] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:14:49] "GET /css/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:14:49] "GET /js/prompts_dataset.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:14:49] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:14:49] "GET /js/main2.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/moda-beleza/prompt_006.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/objetos-arte/prompt_013.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/objetos-arte/prompt_016.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/moda-beleza/prompt_019.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/moda-beleza/prompt_020.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/produtos-publicidade/prompt_021.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/comida-bebida/prompt_022.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:15:24] code 404, message File not found
+127.0.0.1 - - [17/Aug/2026 09:15:24] "GET /prompts/moda-beleza/prompt_024.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [17/Aug/2026 09:35:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:10] "GET /css/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:35:10] "GET /images/pix/qrcode-pix.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:35:10] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:35:10] "GET /js/prompts_dataset.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:10] "GET /js/main2.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/comida-bebida/free_001.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/moda-beleza/free_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/produtos-publicidade/free_003.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/paisagens-cidades/free_004.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/icones-ui/free_006.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/animais/free_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/moda-beleza/free_009.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/objetos-arte/free_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/comida-bebida/free_008.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/paisagens-cidades/free_011.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/produtos-publicidade/free_010.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/animais/free_012.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/icones-ui/free_013.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/comida-bebida/free_015.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/produtos-publicidade/free_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/paisagens-cidades/free_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/moda-beleza/free_016.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/icones-ui/free_020.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/animais/free_019.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/objetos-arte/free_014.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/comida-bebida/free_022.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/objetos-arte/free_021.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/moda-beleza/free_023.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:32] "GET /prompts/produtos-publicidade/free_024.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_026.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_040.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_033.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_047.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_054.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_061.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_068.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_086.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_075.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_091.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/animais/free_081.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_016.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_090.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_096.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_080.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_089.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_098.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_102.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_101.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:35:44] "GET /prompts/pago/animais/premium_105.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:36:09] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:36:53] "GET /images/logo/hub-command-3d.svg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:36:53] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 09:37:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:37:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:37:17] "GET /?v=2 HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 09:37:17] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:49] "GET /prompts/moda-beleza/free_002.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:49] "GET /prompts/comida-bebida/free_001.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:49] "GET /prompts/paisagens-cidades/free_004.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:49] "GET /prompts/produtos-publicidade/free_003.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/animais/free_005.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/icones-ui/free_006.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/comida-bebida/free_008.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/objetos-arte/free_007.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/produtos-publicidade/free_010.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:53] "GET /prompts/moda-beleza/free_009.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:54] "GET /prompts/comida-bebida/free_015.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:54] "GET /prompts/icones-ui/free_013.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:54] "GET /prompts/moda-beleza/free_016.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:54] "GET /prompts/objetos-arte/free_014.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/produtos-publicidade/free_017.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/paisagens-cidades/free_018.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/icones-ui/free_020.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/animais/free_019.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/objetos-arte/free_021.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/comida-bebida/free_022.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/moda-beleza/free_023.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:32:55] "GET /prompts/produtos-publicidade/free_024.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/animais/free_026.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/icones-ui/free_027.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/paisagens-cidades/free_025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/moda-beleza/free_030.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/objetos-arte/free_028.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/comida-bebida/free_029.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/paisagens-cidades/free_032.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/produtos-publicidade/free_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/animais/free_033.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/icones-ui/free_034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/objetos-arte/free_035.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/comida-bebida/free_036.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/animais/free_040.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/moda-beleza/free_037.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/produtos-publicidade/free_038.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/icones-ui/free_041.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/objetos-arte/free_042.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/paisagens-cidades/free_039.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/comida-bebida/free_043.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/moda-beleza/free_044.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/produtos-publicidade/free_045.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/animais/free_047.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/paisagens-cidades/free_046.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:05] "GET /prompts/icones-ui/free_048.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/animais/free_054.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/moda-beleza/free_051.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/comida-bebida/free_050.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/paisagens-cidades/free_053.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/objetos-arte/free_049.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/icones-ui/free_055.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/produtos-publicidade/free_052.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/objetos-arte/free_056.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/comida-bebida/free_057.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/moda-beleza/free_058.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/animais/free_061.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/produtos-publicidade/free_059.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/paisagens-cidades/free_060.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/icones-ui/free_062.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/objetos-arte/free_063.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/comida-bebida/free_064.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/moda-beleza/free_065.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/animais/free_068.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/produtos-publicidade/free_066.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/paisagens-cidades/free_067.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/icones-ui/free_069.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/objetos-arte/free_070.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/moda-beleza/free_072.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:10] "GET /prompts/comida-bebida/free_071.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/animais/free_075.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/icones-ui/free_076.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/produtos-publicidade/free_073.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/objetos-arte/free_077.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/moda-beleza/free_078.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/paisagens-cidades/free_074.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/paisagens-cidades/free_080.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/produtos-publicidade/free_079.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/objetos-arte/free_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/moda-beleza/free_083.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/animais/free_081.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/animais/free_086.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/moda-beleza/free_088.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/objetos-arte/free_087.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/paisagens-cidades/free_085.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/produtos-publicidade/free_084.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/produtos-publicidade/free_089.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/animais/free_091.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/paisagens-cidades/free_090.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/objetos-arte/free_092.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/moda-beleza/free_093.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/produtos-publicidade/free_094.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/moda-beleza/free_096.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:14] "GET /prompts/objetos-arte/free_095.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/objetos-arte/free_098.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/moda-beleza/free_099.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/paisagens-cidades/premium_001.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/produtos-publicidade/free_097.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/produtos-publicidade/free_100.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/produtos-publicidade/premium_004.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/objetos-arte/premium_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_003.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/comida-bebida/premium_006.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/animais/premium_007.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/objetos-arte/premium_008.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/objetos-arte/premium_009.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/comida-bebida/premium_012.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/objetos-arte/premium_010.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/paisagens-cidades/premium_013.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/objetos-arte/premium_011.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_014.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_015.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/animais/premium_016.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/paisagens-cidades/premium_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_019.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:19] "GET /prompts/pago/moda-beleza/premium_020.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_023.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_021.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_022.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/paisagens-cidades/premium_024.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_026.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_028.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_027.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_029.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_030.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_035.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_037.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/paisagens-cidades/premium_036.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_033.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/objetos-arte/premium_032.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/produtos-publicidade/premium_038.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/objetos-arte/premium_039.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_040.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/objetos-arte/premium_041.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_043.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_042.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:23] "GET /prompts/pago/moda-beleza/premium_044.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_045.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_049.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_050.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_047.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/objetos-arte/premium_046.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_048.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_051.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_052.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/paisagens-cidades/premium_053.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_054.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_055.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/objetos-arte/premium_059.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/produtos-publicidade/premium_057.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_058.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/objetos-arte/premium_061.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_062.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/moda-beleza/premium_056.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:26] "GET /prompts/pago/produtos-publicidade/premium_060.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/moda-beleza/premium_063.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/paisagens-cidades/premium_064.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/objetos-arte/premium_065.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/produtos-publicidade/premium_068.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/moda-beleza/premium_066.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:33:27] "GET /prompts/pago/objetos-arte/premium_067.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/comida-bebida/premium_069.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_070.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_071.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_072.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_073.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_074.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_076.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/produtos-publicidade/premium_075.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/produtos-publicidade/premium_077.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/produtos-publicidade/premium_078.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/animais/premium_080.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_079.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_083.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_084.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/moda-beleza/premium_081.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_085.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_086.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_087.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/objetos-arte/premium_088.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/animais/premium_089.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/animais/premium_090.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/paisagens-cidades/premium_091.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:34:10] "GET /prompts/pago/paisagens-cidades/premium_092.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:10] "GET /prompts/pago/animais/premium_096.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:45:10] "GET /prompts/pago/produtos-publicidade/premium_095.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:10] "GET /prompts/pago/moda-beleza/premium_093.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:10] "GET /prompts/pago/paisagens-cidades/premium_094.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_098.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_101.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_102.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/comida-bebida/premium_097.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_100.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/paisagens-cidades/premium_099.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_105.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/paisagens-cidades/premium_104.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_103.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/paisagens-cidades/premium_106.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_107.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_110.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_108.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_109.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/animais/premium_112.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_111.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_114.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/objetos-arte/premium_113.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/objetos-arte/premium_115.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/produtos-publicidade/premium_116.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/moda-beleza/premium_118.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/comida-bebida/premium_117.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/paisagens-cidades/premium_119.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:22] "GET /prompts/pago/objetos-arte/premium_120.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:38] "GET /prompts/pago/objetos-arte/premium_121.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:39] "GET /prompts/pago/produtos-publicidade/premium_122.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:40] "GET /prompts/pago/comida-bebida/premium_123.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:40] "GET /prompts/pago/animais/premium_124.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:41] "GET /prompts/pago/produtos-publicidade/premium_125.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:42] "GET /prompts/pago/paisagens-cidades/premium_126.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:43] "GET /prompts/pago/animais/premium_127.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:44] "GET /prompts/pago/paisagens-cidades/premium_128.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:44] "GET /prompts/pago/produtos-publicidade/premium_129.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:45] "GET /prompts/pago/moda-beleza/premium_130.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:46] "GET /prompts/pago/moda-beleza/premium_131.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:47] "GET /prompts/pago/moda-beleza/premium_132.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:50] "GET /prompts/pago/paisagens-cidades/premium_133.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:51] "GET /prompts/pago/paisagens-cidades/premium_134.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:45:52] "GET /prompts/pago/objetos-arte/premium_135.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /css/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /images/logo/hub-command-3d.svg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /images/pix/qrcode-pix.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /images/logo/Ativo%205ARQUIVO.png HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:51] "GET /js/main2.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /_review.html HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_132.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_006.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_135.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_010.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_011.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_015.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_012.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:57:53] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /_review.html HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_061.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_072.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_147.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_100.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_027.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_neural_arts/prompt_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_neural_arts/prompt_060.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_robots_art/prompt_049.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_robots_art/prompt_064.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_002.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_044.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_073.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_003.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_045.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_074.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_midjourney_free/prompt_063.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_midjourney_free/prompt_065.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_neural_arts/prompt_072.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:33] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_099.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:41] "GET /PromptHub_coleta/grupo_neural_arts/prompt_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:41] "GET /PromptHub_coleta/grupo_robots_art/prompt_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:44] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_075.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:44] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_004.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:44] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_005.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:44] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_076.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:45] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_006.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:45] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_077.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:45] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_007.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:45] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_068.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:49] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_008.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:49] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_069.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:49] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_010.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:49] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_071.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_011.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_072.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_012.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_064.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:51] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_013.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:51] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_065.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:58] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_014.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:58] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_066.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:59] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_015.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:59] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_067.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:59] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_016.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 10:58:59] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_052.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:00:42] "GET /_review.html HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:36] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_017.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:36] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_053.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:36] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:36] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_054.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_022.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_056.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_058.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_020.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_055.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_019.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_023.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_059.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_021.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:02:50] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_057.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:24] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_024.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:24] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_060.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:24] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:24] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_061.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_026.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_062.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_027.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_063.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_028.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_096.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_029.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:33] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_089.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_030.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_090.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_091.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_032.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:34] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_092.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_033.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_083.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_084.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_035.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:35] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_085.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:36] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_036.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:36] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_086.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:36] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_037.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:36] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_087.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:37] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_038.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:37] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_088.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:37] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_039.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:37] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_078.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:38] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_040.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:38] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_079.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:38] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_041.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:38] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_080.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:40] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_042.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:40] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_081.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:41] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_043.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:41] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_082.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:41] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_021.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:41] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_109.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:43] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_049.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:43] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_110.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:43] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_050.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:43] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_112.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:44] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_051.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:44] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_113.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:44] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_054.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:03:44] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_114.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:04:14] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_018.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:07:19] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_021.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:07:19] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_024.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:07:19] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_020.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:07:31] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:32] "GET /js/prompts_dataset.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/moda-beleza/free_002.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/comida-bebida/free_001.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/paisagens-cidades/free_004.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/produtos-publicidade/free_003.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/animais/free_005.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/icones-ui/free_006.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/objetos-arte/free_007.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:42] "GET /prompts/comida-bebida/free_008.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:43] "GET /prompts/moda-beleza/free_009.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:43] "GET /prompts/produtos-publicidade/free_010.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:43] "GET /prompts/animais/free_012.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:43] "GET /prompts/paisagens-cidades/free_011.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/icones-ui/free_013.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/objetos-arte/free_014.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/moda-beleza/free_016.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/comida-bebida/free_015.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/produtos-publicidade/free_017.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/paisagens-cidades/free_018.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/animais/free_019.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/icones-ui/free_020.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/objetos-arte/free_021.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/comida-bebida/free_022.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/moda-beleza/free_023.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:44] "GET /prompts/produtos-publicidade/free_024.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /_review.html HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_147.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_073.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_074.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_132.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:52] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_135.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:56] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_075.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:57] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_076.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:57] "GET /PromptHub_coleta/grupo_promty_neirosetei/prompt_077.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:07:58] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:07:59] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_026.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:03] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_027.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:03] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_028.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:03] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_030.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:23] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_033.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:23] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_031.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:23] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_036.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:23] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:23] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_037.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:51] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_045.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:51] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_041.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:51] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_046.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:51] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_040.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:08:51] "GET /PromptHub_coleta/grupo_ai_arts_prompts/prompt_047.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/Aug/2026 11:09:29] "GET /_review.html HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_018.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_082.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_072.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_100.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_prompts_neirosetei/prompt_061.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_nano_banana_ai/prompt_027.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_robots_art/prompt_049.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_robots_art/prompt_064.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_midjourney_free/prompt_063.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_midjourney_free/prompt_065.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:30] "GET /PromptHub_coleta/grupo_rtm_prompt_library/prompt_099.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/Aug/2026 11:09:55] "GET /_review.html HTTP/1.1" 200 -
