@@ -118,9 +118,9 @@ async function body(req) {
 }
 
 async function api(req, res) {
-  const db = await readDb();
   try {
-    if (req.method === 'GET' && req.url === '/healthz') return json(res, 200, { ok: true });
+    const db = await readDb();
+    if (req.method === 'GET' && req.url === '/api/healthz') return json(res, 200, { ok: true });
     if (req.method === 'POST' && req.url === '/api/auth/signup') {
       const { email, password } = await body(req);
       if (!email || !password || password.length < 8) return json(res, 400, { error: 'E-mail e senha de no minimo 8 caracteres sao obrigatorios.' });
@@ -198,6 +198,7 @@ function contentType(file) {
 }
 
 const server = http.createServer(async (req, res) => {
+  if (req.method === 'GET' && req.url === '/healthz') return json(res, 200, { ok: true });
   if (req.url.startsWith('/api/')) return api(req, res);
   const requested = decodeURIComponent(req.url.split('?')[0]);
   const file = path.resolve(root, `.${requested === '/' ? '/index.html' : requested}`);
