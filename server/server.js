@@ -161,7 +161,6 @@ async function api(req, res) {
         body: JSON.stringify({
           reason: 'HubVision Pro',
           external_reference: user.email,
-          payer_email: process.env.MERCADOPAGO_TEST_PAYER_EMAIL || user.email,
           back_url: backUrl,
           notification_url: process.env.MERCADOPAGO_WEBHOOK_URL || 'https://hubvisionb.com.br/api/billing/webhook',
           auto_recurring: { frequency: 1, frequency_type: 'months', transaction_amount: Number(process.env.MERCADOPAGO_MONTHLY_PRICE || 24.9), currency_id: 'BRL' }
