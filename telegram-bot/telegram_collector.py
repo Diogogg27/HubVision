@@ -36,7 +36,9 @@ API_ID = int(required_env("TELEGRAM_API_ID"))
 API_HASH = required_env("TELEGRAM_API_HASH")
 PHONE = os.getenv("TELEGRAM_PHONE", "").strip() or None
 FOLDER_NAME = os.getenv("TELEGRAM_FOLDER", "PROMPTS/IA").strip()
-COLLECT_REACTION = os.getenv("TELEGRAM_COLLECT_REACTION", "🔥").strip()
+COLLECT_REACTIONS = [r.strip() for r in os.getenv("TELEGRAM_COLLECT_REACTIONS", "🔥").split(",") if r.strip()]
+if not COLLECT_REACTIONS:
+    COLLECT_REACTIONS = ["🔥"]
 
 
 def slugify(value):
@@ -47,7 +49,7 @@ def slugify(value):
 def has_collect_reaction(reactions):
     return any(
         getattr(getattr(result, "reaction", None), "emoticon", None)
-        == COLLECT_REACTION
+        in COLLECT_REACTIONS
         for result in (reactions.results or [])
     )
 
