@@ -1,6 +1,7 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';
@@ -204,8 +205,14 @@ const server = http.createServer(async (req, res) => {
   const requested = decodeURIComponent(req.url.split('?')[0]);
   const file = path.resolve(root, `.${requested === '/' ? '/index.html' : requested}`);
   if (!file.startsWith(root)) return json(res, 403, { error: 'Acesso negado.' });
-  try { res.writeHead(200, { 'content-type': contentType(file) }); res.end(await fs.readFile(file)); }
-  catch { json(res, 404, { error: 'Arquivo nao encontrado.' }); }
+  try {
+    const headers = { 'content-type': contentType(file) };
+    if (/\.(jpg|jpeg|png|svg|ico|js|css)$/.test(file)) {
+      headers['cache-control'] = 'public, max-age=86400';
+    }
+    res.writeHead(200, headers);
+    createReadStream(file).pipe(res);
+  } catch { json(res, 404, { error: 'Arquivo nao encontrado.' }); }
 });
 
 server.listen(port, () => console.log(`HubVision em http://localhost:${port}`));
