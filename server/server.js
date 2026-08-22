@@ -168,7 +168,8 @@ async function api(req, res) {
         })
       });
       const result = await response.json();
-      return json(res, response.ok ? 200 : response.status, response.ok ? { checkoutUrl: result.init_point } : { error: result.message || 'Falha ao criar assinatura.' });
+      console.log('Mercado Pago response:', JSON.stringify(result));
+      return json(res, response.ok ? 200 : response.status, response.ok ? { checkoutUrl: result.init_point } : { error: result.message || 'Falha ao criar assinatura.', details: result });
     }
 
     if (req.method === 'POST' && req.url.startsWith('/api/billing/webhook')) {
