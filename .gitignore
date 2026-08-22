@@ -38,6 +38,7 @@ telegram-bot/processed_reactions.json
 # Prompts images (too large for git)
 prompts/pago/
 prompts/gratis/
+prompts_library/_archive/
 
 # Temporary/work files
 .freebuff/
