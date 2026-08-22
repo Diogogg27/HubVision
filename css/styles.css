@@ -364,16 +364,16 @@ body {
 
 .nav-btn-signup {
   color: #000;
-  font-weight: 700;
-  background: #fff;
-  border: 2px solid #000;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  border: 1px solid transparent;
+  text-shadow: 0 0 4px rgba(255,255,255,0.5);
 }
 
 .nav-btn-signup:hover {
-  background: #000;
-  color: #fff;
+  opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 16px rgba(0,135,189,0.3);
 }
 
 /* === HERO === */
