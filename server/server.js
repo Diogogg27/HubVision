@@ -137,24 +137,30 @@ async function api(req, res) {
       const user = sessionUser(req, db);
       if (!user) return json(res, 401, { error: 'Entre para iniciar a assinatura.' });
       if (!process.env.MERCADOPAGO_ACCESS_TOKEN) return json(res, 503, { error: 'Mercado Pago ainda nao foi configurado no servidor.' });
+      const appUrl = (process.env.APP_URL || 'https://hubvision-production.up.railway.app').replace(/\/$/, '');
       const configuredBackUrl = process.env.MERCADOPAGO_BACK_URL || '';
       const backUrl = configuredBackUrl.startsWith('https://') && !configuredBackUrl.includes('localhost')
         ? configuredBackUrl
-        : 'https://hubvisionb.com.br/';
+        : `${appUrl}/#membro`;
+      const webhookUrl = process.env.MERCADOPAGO_WEBHOOK_URL || `${appUrl}/api/billing/webhook`;
+      // payer_email: se MERCADOPAGO_TEST_PAYER_EMAIL estiver configurado, usa
+      // ele (para testes com credenciais de teste do MP). Caso contrario, usa
+      // o email do usuario logado (producao com cliente real).
+      const payerEmail = process.env.MERCADOPAGO_TEST_PAYER_EMAIL || user.email;
       const response = await fetch('https://api.mercadopago.com/preapproval', {
         method: 'POST',
         headers: { authorization: `Bearer ${process.env.MERCADOPAGO_ACCESS_TOKEN}`, 'content-type': 'application/json' },
         body: JSON.stringify({
           reason: 'HubVision Pro',
           external_reference: user.email,
-          payer_email: process.env.MERCADOPAGO_PAYER_EMAIL || user.email,
+          payer_email: payerEmail,
           back_url: backUrl,
-          notification_url: process.env.MERCADOPAGO_WEBHOOK_URL || 'https://hubvisionb.com.br/api/billing/webhook',
+          notification_url: webhookUrl,
           auto_recurring: { frequency: 1, frequency_type: 'months', transaction_amount: Number(process.env.MERCADOPAGO_MONTHLY_PRICE || 24.9), currency_id: 'BRL' }
         })
       });
       const result = await response.json();
-      console.log('Mercado Pago response:', JSON.stringify(result));
+      console.log('Mercado Pago response:', JSON.stringify(result).slice(0, 600));
       return json(res, response.ok ? 200 : response.status, response.ok ? { checkoutUrl: result.init_point } : { error: result.message || 'Falha ao criar assinatura.', details: result });
     }
 
