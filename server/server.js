@@ -146,7 +146,7 @@ async function api(req, res) {
       // payer_email: se MERCADOPAGO_TEST_PAYER_EMAIL estiver configurado, usa
       // ele (para testes com credenciais de teste do MP). Caso contrario, usa
       // o email do usuario logado (producao com cliente real).
-      const payerEmail = process.env.MERCADOPAGO_TEST_PAYER_EMAIL || user.email;
+      const payerEmail = process.env.MERCADOPAGO_TEST_PAYER_EMAIL || 'test_user_4257124873226084611@testuser.com';
       console.log('MP checkout: payerEmail=%s appUrl=%s hasToken=%s', payerEmail, appUrl, !!process.env.MERCADOPAGO_ACCESS_TOKEN);
       try {
         const response = await fetch('https://api.mercadopago.com/preapproval', {
