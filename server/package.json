@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
     "pg": "^8.13.1"
   },
   "scripts": {

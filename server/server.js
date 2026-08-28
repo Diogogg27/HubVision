@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import pg from 'pg';
+import * as db from './db.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data');
@@ -24,67 +24,26 @@ try {
 
 const port = Number(process.env.PORT || 8787);
 const adminEmail = (process.env.HUBVISION_ADMIN_EMAIL || 'diogogg27@gmail.com').toLowerCase();
-const pool = process.env.DATABASE_URL
-  ? new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : undefined })
-  : null;
+const pool = null; // Postgres direto substituído pela camada Supabase (db.js)
 
-const databaseReady = pool
-  ? pool.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        email TEXT PRIMARY KEY,
-        password TEXT NOT NULL,
-        plan TEXT NOT NULL DEFAULT 'free',
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        subscription_id TEXT,
-        subscription_status TEXT
-      )
-    `)
-  : Promise.resolve();
+// usa Supabase se configurado; senão, JSON local (fallback dev)
+const usingSupabase = db.supabaseReady();
 
 async function readDb() {
-  if (pool) {
-    await databaseReady;
-    const result = await pool.query('SELECT email, password, plan, created_at, subscription_id, subscription_status FROM users ORDER BY created_at ASC');
-    return {
-      users: result.rows.map((user) => ({
-        email: user.email,
-        password: user.password,
-        plan: user.plan,
-        createdAt: user.created_at.toISOString(),
-        ...(user.subscription_id ? { subscriptionId: user.subscription_id } : {}),
-        ...(user.subscription_status ? { subscriptionStatus: user.subscription_status } : {})
-      }))
-    };
+  if (usingSupabase) {
+    const users = await db.getUsers();
+    return { users, source: 'supabase' };
   }
   try { return JSON.parse(await fs.readFile(dbPath, 'utf8')); }
   catch { return { users: [] }; }
 }
 
-async function writeDb(db) {
-  if (pool) {
-    await databaseReady;
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
-      await client.query('DELETE FROM users');
-      for (const user of db.users) {
-        await client.query(
-          `INSERT INTO users (email, password, plan, created_at, subscription_id, subscription_status)
-           VALUES ($1, $2, $3, $4, $5, $6)`,
-          [user.email, user.password, user.plan || 'free', user.createdAt || new Date().toISOString(), user.subscriptionId || null, user.subscriptionStatus || null]
-        );
-      }
-      await client.query('COMMIT');
-    } catch (error) {
-      await client.query('ROLLBACK');
-      throw error;
-    } finally {
-      client.release();
-    }
-    return;
+async function writeDb(dbData) {
+  // Fallback local (sem Supabase): grava no JSON.
+  if (!db.supabaseReady()) {
+    await fs.mkdir(dataDir, { recursive: true });
+    await fs.writeFile(dbPath, JSON.stringify({ users: dbData.users }, null, 2));
   }
-  await fs.mkdir(dataDir, { recursive: true });
-  await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
 }
 
 function json(res, status, body) {
@@ -105,7 +64,7 @@ async function verifyPassword(password, stored) {
 function sessionUser(req, db) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   const email = token && sessions.get(token);
-  return email ? db.users.find((user) => user.email === email) : null;
+  return email ? (db?.users || []).find((user) => user.email === email) : null;
 }
 
 function publicUser(user) {
@@ -122,30 +81,56 @@ async function api(req, res) {
   try {
     const db = await readDb();
     if (req.method === 'GET' && req.url === '/api/healthz') return json(res, 200, { ok: true });
+
     if (req.method === 'POST' && req.url === '/api/auth/signup') {
       const { email, password } = await body(req);
       if (!email || !password || password.length < 8) return json(res, 400, { error: 'E-mail e senha de no minimo 8 caracteres sao obrigatorios.' });
-      if (db.users.some((user) => user.email === email.toLowerCase())) return json(res, 409, { error: 'Este e-mail ja possui uma conta.' });
-      const user = { email: email.toLowerCase(), password: await hashPassword(password), plan: 'free', createdAt: new Date().toISOString() };
-      db.users.push(user);
-      await writeDb(db);
+      const existing = usingSupabase ? await db.findUserByEmail(email) : db.users.find((u) => u.email === email.toLowerCase());
+      if (existing) return json(res, 409, { error: 'Este e-mail ja possui uma conta.' });
+      const hashed = await hashPassword(password);
+      let user;
+      if (usingSupabase) {
+        user = await db.createUser(email, hashed);
+      } else {
+        user = { email: email.toLowerCase(), password: hashed, plan: 'free', createdAt: new Date().toISOString() };
+        db.users.push(user);
+        await fs.mkdir(dataDir, { recursive: true });
+        await fs.writeFile(dbPath, JSON.stringify({ users: db.users }, null, 2));
+      }
       const token = crypto.randomBytes(32).toString('hex');
       sessions.set(token, user.email);
-       return json(res, 201, { token, user: publicUser(user) });
+      return json(res, 201, { token, user: publicUser(user) });
     }
 
     if (req.method === 'POST' && req.url === '/api/auth/login') {
       const { email, password } = await body(req);
-      const user = db.users.find((item) => item.email === String(email).toLowerCase());
+      let user = usingSupabase ? await db.findUserByEmail(email) : db.users.find((item) => item.email === String(email).toLowerCase());
       if (!user || !(await verifyPassword(password || '', user.password))) return json(res, 401, { error: 'E-mail ou senha invalidos.' });
       const token = crypto.randomBytes(32).toString('hex');
       sessions.set(token, user.email);
-       return json(res, 200, { token, user: publicUser(user) });
+      return json(res, 200, { token, user: publicUser(user) });
     }
 
     if (req.method === 'GET' && req.url === '/api/auth/me') {
       const user = sessionUser(req, db);
-       return user ? json(res, 200, { user: publicUser(user) }) : json(res, 401, { error: 'Sessao expirada.' });
+      return user ? json(res, 200, { user: publicUser(user) }) : json(res, 401, { error: 'Sessao expirada.' });
+    }
+
+    if (req.method === 'GET' && req.url === '/api/content/categories') {
+      const categories = usingSupabase ? await db.getCategories() : [];
+      return json(res, 200, { categories });
+    }
+
+    if (req.method === 'GET' && req.url.startsWith('/api/content/prompts')) {
+      const u = new URL(req.url, 'http://localhost');
+      const prompts = usingSupabase ? await db.getPrompts({ category: u.searchParams.get('category'), model: u.searchParams.get('model') }) : [];
+      return json(res, 200, { prompts });
+    }
+
+    if (req.method === 'GET' && req.url.startsWith('/api/content/tools')) {
+      const u = new URL(req.url, 'http://localhost');
+      const tools = usingSupabase ? await db.getTools({ category: u.searchParams.get('category') }) : [];
+      return json(res, 200, { tools });
     }
 
     if (req.method === 'POST' && req.url === '/api/billing/checkout') {
@@ -180,12 +165,19 @@ async function api(req, res) {
       const response = await fetch(`https://api.mercadopago.com/preapproval/${subscriptionId}`, { headers: { authorization: `Bearer ${process.env.MERCADOPAGO_ACCESS_TOKEN}` } });
       if (!response.ok) return json(res, 200, { received: true });
       const subscription = await response.json();
-      const user = db.users.find((item) => item.email === subscription.external_reference || item.email === subscription.payer_email);
-      if (user) {
-        user.plan = subscription.status === 'authorized' ? 'premium' : 'free';
-        user.subscriptionId = String(subscription.id);
-        user.subscriptionStatus = subscription.status;
-        await writeDb(db);
+      const email = subscription.external_reference || subscription.payer_email;
+      if (usingSupabase) {
+        await db.updateUserPlan(email, subscription.status === 'authorized' ? 'premium' : 'free', subscription);
+        await db.upsertSubscription(email, subscription);
+      } else {
+        const user = db.users.find((item) => item.email === email);
+        if (user) {
+          user.plan = subscription.status === 'authorized' ? 'premium' : 'free';
+          user.subscriptionId = String(subscription.id);
+          user.subscriptionStatus = subscription.status;
+          await fs.mkdir(dataDir, { recursive: true });
+          await fs.writeFile(dbPath, JSON.stringify({ users: db.users }, null, 2));
+        }
       }
       return json(res, 200, { received: true });
     }
